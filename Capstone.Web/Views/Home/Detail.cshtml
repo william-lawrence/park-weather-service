@@ -6,7 +6,7 @@
     int LowTempDanger = 20;
 }
 
-<img src="~/images/@(Model.Code).jpg" />
+<img src="~/images/parks/@(Model.Code).jpg" />
 
 <h2>@Model.Name</h2>
 
@@ -14,20 +14,22 @@
 
 <p>
     Welcome to @Model.Name located in the @Model.Climate climate of @Model.State!
-    @Model.Name joined the ranks of the National Parks in @Model.YearFounded and covers an area of @Model.Acreage acres at an elevation of @(Model.ElevationInFeet)ft. above sea level.
+    @Model.Name joined the ranks of the National Parks in @Model.YearFounded and covers an area of @Model.Acreage.ToString("N0") acres at an elevation of @(Model.ElevationInFeet)ft. above sea level.
     We boast an immense @Model.MilesOfTrail miles of hiking trails and @Model.NumberOfCampsites campsites available to the public.
     You might see as many as @Model.NumberOfAnimalSpecies types of animals here, like maybe a fox or a moose!
-    @Model.InspirationalQuoteSource once said about us, "@Model.InspirationalQuote," so come check it out and see for yourself.
-    Admission is just a modest $@Model.EntryFee. The @Model.AnnualVisitorCount people that come see us every year can't be wrong!
+    @Model.InspirationalQuoteSource once said about us, "@Model.InspirationalQuote" So come check it out and see for yourself!
+    Admission is just a modest @Model.EntryFee.ToString("C"). The @Model.AnnualVisitorCount.ToString("N0") people that come see us every year can't be wrong!
 </p>
 
 <h3>Five Day Forecast</h3>
+<a asp-controller="Home" asp-action="ChangeUnits" asp-route-code="@Model.Code" asp-route-unit="F">F</a>
+<a asp-controller="Home" asp-action="ChangeUnits" asp-route-code="@Model.Code" asp-route-unit="C">C</a>
+<a asp-controller="Home" asp-action="ChangeUnits" asp-route-code="@Model.Code" asp-route-unit="K">K</a>
 
 @for (int i = 0; i < Model.FiveDayForecast.Count; i++)
 {
     <div class="weather-@((i==0)?"big":"small")">
-        <img src="~/images/weather/@(Model.FiveDayForecast[i].Forecast.Where(c => !Char.IsWhiteSpace(c)).ToArray()).png" alt="@Model.FiveDayForecast[i].Forecast"/>
-
+        <img src="~/images/weather/@(new string(Model.FiveDayForecast[i].Forecast.Where(c => !Char.IsWhiteSpace(c)).ToArray())).png" alt="@Model.FiveDayForecast[i].Forecast" />
         @{
             string high = "";
             string low = "";
@@ -55,11 +57,11 @@
                 <ul>
                     @if (Model.FiveDayForecast[i].Forecast == "snow")
                     {
-                        <li>Pack your Snowshoes</li>
+                        <li>Pack Your Snowshoes</li>
                     }
                     @if (Model.FiveDayForecast[i].Forecast == "rain")
                     {
-                        <li>Pack your Rain Gear</li>
+                        <li>Pack Your Rain Gear</li>
                         <li>Wear Waterproof Shoes</li>
                     }
                     @if (Model.FiveDayForecast[i].Forecast == "thunderstorms")
@@ -69,7 +71,7 @@
                     }
                     @if (Model.FiveDayForecast[i].Forecast == "sunny")
                     {
-                        <li>Pack your Sunblock</li>
+                        <li>Pack Your Sunblock</li>
                     }
                     @if (Model.FiveDayForecast[i].HighTempF >= HighTempDanger)
                     {
@@ -83,7 +85,7 @@
                     {
                         <li>Be Aware of the Dangers of Exposure to Frigid Temperatures</li>
                     }
-                    <li>Have a great day!</li>
+                    <li>Have a Great Day!</li>
                 </ul>
             </div>
         }

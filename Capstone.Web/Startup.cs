@@ -27,7 +27,7 @@ namespace Capstone.Web
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
+                options.CheckConsentNeeded = context => false;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
             
@@ -39,7 +39,10 @@ namespace Capstone.Web
             services.AddTransient<IWeatherDAL>(d => new WeatherDAL(connectionString));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-        }
+
+			services.AddDistributedMemoryCache();
+			services.AddSession();
+		}
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -53,8 +56,11 @@ namespace Capstone.Web
                 app.UseExceptionHandler("/Home/Error");
             }
 
+			app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+
+			app.UseSession();
 
             app.UseMvc(routes =>
             {
