@@ -12,7 +12,7 @@ namespace Capstone.Web.Controllers
     public class HomeController : Controller
     {
         // Dependency Injection
-
+        #region Dependency Injection
         private readonly IParksDAL ParksDAL;
         private readonly IWeatherDAL WeatherDAL;
         private readonly ISurveyDAL SurveyDAL;
@@ -23,6 +23,8 @@ namespace Capstone.Web.Controllers
             this.WeatherDAL = weatherDAL;
             this.SurveyDAL = surveyDAL;
         }
+        #endregion
+
 
         public IActionResult Index()
         {
