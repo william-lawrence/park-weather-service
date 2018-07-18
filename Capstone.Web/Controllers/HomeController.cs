@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Capstone.Web.Models;
 using Capstone.Web.DAL;
+using Capstone.Web.Extensions;
 
 namespace Capstone.Web.Controllers
 {
@@ -16,6 +17,8 @@ namespace Capstone.Web.Controllers
 		private readonly IParksDAL ParksDAL;
 		private readonly IWeatherDAL WeatherDAL;
 		private readonly ISurveyDAL SurveyDAL;
+
+		private const string Temp_Unit_Choice = "Temp_Unit_Choice";
 
 		public HomeController(IParksDAL parksDAL, IWeatherDAL weatherDAL, ISurveyDAL surveyDAL)
 		{
@@ -46,10 +49,15 @@ namespace Capstone.Web.Controllers
 
 		public IActionResult Detail(string code)
 		{
-			code = Convert.ToString(ViewData["code"]);
 			Park park = ParksDAL.GetPark(code);
 			park.FiveDayForecast = WeatherDAL.GetForecast(code);
 			return View(park);
+		}
+
+		public IActionResult ChangeUnits(string code, string unit)
+		{
+			HttpContext.Session.Set(Temp_Unit_Choice,unit);
+			return RedirectToAction("Detail", "Home", code);
 		}
 
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
