@@ -58,8 +58,9 @@ namespace Capstone.Web.DAL
 				{
 					conn.Open();
 
-					string sql = $"SELECT * FROM park WHERE parkcode = {code};";
+					string sql = $"SELECT * FROM park WHERE parkcode = @code;";
 					SqlCommand cmd = new SqlCommand(sql, conn);
+					cmd.Parameters.AddWithValue("@code", code);
 					SqlDataReader reader = cmd.ExecuteReader();
 
 					while (reader.Read())

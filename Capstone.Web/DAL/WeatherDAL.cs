@@ -32,8 +32,9 @@ namespace Capstone.Web.DAL
 				{
 					conn.Open();
 
-					string sql = $"SELECT * FROM weather WHERE parkCode = {code} ORDER BY fiveDayForecastValue ASC;";
+					string sql = $"SELECT * FROM weather WHERE parkCode = @code ORDER BY fiveDayForecastValue ASC;";
 					SqlCommand cmd = new SqlCommand(sql, conn);
+					cmd.Parameters.AddWithValue("@code", code);
 					SqlDataReader reader = cmd.ExecuteReader();
 
 					while (reader.Read())
