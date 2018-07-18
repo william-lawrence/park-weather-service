@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Capstone.Web.DAL
 {
-    public class ParksDAL
-    {
-    }
+	public class ParksDAL : IParksDAL
+	{
+	}
 }
