@@ -4,7 +4,7 @@
 }
 
 <body>
-    <h2>Park Survey:</h2>
+    <h2>Favorite Park Survey:</h2>
     <div>
         <form asp-controller="Home" asp-action="Survey" method="post">
 
@@ -14,11 +14,11 @@
 
             <label>Email</label>
             <input asp-for="EmailAddress" />
+            <span asp-validation-for="EmailAddress" class="validation-error"></span>
             <br />
 
-
-
             <label>Activity Level</label>
+            <span asp-validation-for="ActivityLevel" class="validation-error"></span>
             <br />
 
             <input value="Inactive" type="radio" asp-for="ActivityLevel" />

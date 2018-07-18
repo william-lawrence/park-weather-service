@@ -10,13 +10,21 @@ using Capstone.Web.Extensions;
 
 namespace Capstone.Web.Controllers
 {
-	public class HomeController : Controller
-	{
-		// Dependency Injection
+    public class HomeController : Controller
+    {
+        // Dependency Injection
+        #region Dependency Injection
+        private readonly IParksDAL ParksDAL;
+        private readonly IWeatherDAL WeatherDAL;
+        private readonly ISurveyDAL SurveyDAL;
 
-		private readonly IParksDAL ParksDAL;
-		private readonly IWeatherDAL WeatherDAL;
-		private readonly ISurveyDAL SurveyDAL;
+        public HomeController(IParksDAL parksDAL, IWeatherDAL weatherDAL, ISurveyDAL surveyDAL)
+        {
+            this.ParksDAL = parksDAL;
+            this.WeatherDAL = weatherDAL;
+            this.SurveyDAL = surveyDAL;
+        }
+        #endregion
 
 		private const string Temp_Unit_Choice = "Temp_Unit_Choice";
 
@@ -29,12 +37,18 @@ namespace Capstone.Web.Controllers
 
         public IActionResult Index()
         {
-        	IList<Park> parks = ParksDAL.GetAllParks();
-			return View(parks);
-        }  
-        
+            IList<Park> parks = ParksDAL.GetAllParks();
+            return View(parks);
+        }
+
         [HttpGet]
         public IActionResult Survey()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult FavoritePark()
         {
             return View();
         }
