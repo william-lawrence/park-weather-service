@@ -35,3 +35,41 @@ body {
         display: none;
     }
 }
+
+.home-park {
+    display: block;
+    padding: 10px;
+}
+
+.home-park-img {
+    display: inline-block;
+    padding-right: 15px;
+}
+
+    .home-park-img img {
+        width: 300px;
+        height: auto;
+    }
+
+.home-park-text {
+    display: inline-block;
+    max-width: 800px;
+}
+
+.title {
+    display: block;
+    font-weight: bold;
+    font-size: 2em;
+    color: black;
+    padding-bottom: 10px;
+}
+
+.description {
+    display: block
+}
+
+.weather-big {
+}
+
+.weathe-small {
+}

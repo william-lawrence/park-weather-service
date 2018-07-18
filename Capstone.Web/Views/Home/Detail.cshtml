@@ -1,7 +1,96 @@
-﻿
+﻿@model Park
 @{
     ViewData["Title"] = "Detail";
+    int HighTempDanger = 75;
+    int TempDifferenceAdvisory = 20;
+    int LowTempDanger = 20;
 }
 
-<h2>Detail</h2>
+<img src="~/images/@(Model.Code).jpg" />
 
+<h2>@Model.Name</h2>
+
+<p>@Model.Description</p>
+
+<p>
+    Welcome to @Model.Name located in the @Model.Climate climate of @Model.State!
+    @Model.Name joined the ranks of the National Parks in @Model.YearFounded and covers an area of @Model.Acreage acres at an elevation of @(Model.ElevationInFeet)ft. above sea level.
+    We boast an immense @Model.MilesOfTrail miles of hiking trails and @Model.NumberOfCampsites campsites available to the public.
+    You might see as many as @Model.NumberOfAnimalSpecies types of animals here, like maybe a fox or a moose!
+    @Model.InspirationalQuoteSource once said about us, "@Model.InspirationalQuote," so come check it out and see for yourself.
+    Admission is just a modest $@Model.EntryFee. The @Model.AnnualVisitorCount people that come see us every year can't be wrong!
+</p>
+
+<h3>Five Day Forecast</h3>
+
+@for (int i = 0; i < Model.FiveDayForecast.Count; i++)
+{
+    <div class="weather-@((i==0)?"big":"small")">
+        <img src="~/images/weather/@(Model.FiveDayForecast[i].Forecast.Where(c => !Char.IsWhiteSpace(c)).ToArray()).png" alt="@Model.FiveDayForecast[i].Forecast"/>
+
+        @{
+            string high = "";
+            string low = "";
+            if (true)
+            {
+                high = Model.FiveDayForecast[i].HighTempF.ToString() + "°F";
+                low = Model.FiveDayForecast[i].LowTempF.ToString() + "°F";
+            }
+            else if (true)
+            {
+                high = Model.FiveDayForecast[i].HighTempC.ToString() + "°C";
+                low = Model.FiveDayForecast[i].LowTempC.ToString() + "°C";
+            }
+            else
+            {
+                high = Model.FiveDayForecast[i].HighTempK.ToString() + "K";
+                low = Model.FiveDayForecast[i].LowTempK.ToString() + "K";
+            }
+        }
+        @if (i == 0)
+        {
+            <div>High: @high  Low:@low</div>
+            <div>
+                Just Remember:
+                <ul>
+                    @if (Model.FiveDayForecast[i].Forecast == "snow")
+                    {
+                        <li>Pack your Snowshoes</li>
+                    }
+                    @if (Model.FiveDayForecast[i].Forecast == "rain")
+                    {
+                        <li>Pack your Rain Gear</li>
+                        <li>Wear Waterproof Shoes</li>
+                    }
+                    @if (Model.FiveDayForecast[i].Forecast == "thunderstorms")
+                    {
+                        <li>Seek Shelter During a Storm</li>
+                        <li>SAvoid Hiking on Exposed Ridges</li>
+                    }
+                    @if (Model.FiveDayForecast[i].Forecast == "sunny")
+                    {
+                        <li>Pack your Sunblock</li>
+                    }
+                    @if (Model.FiveDayForecast[i].HighTempF >= HighTempDanger)
+                    {
+                        <li>Bring an Extra Gallon of Water</li>
+                    }
+                    @if (Model.FiveDayForecast[i].HighTempF - Model.FiveDayForecast[i].LowTempF >= TempDifferenceAdvisory)
+                    {
+                        <li>Wear Breathable Layers</li>
+                    }
+                    @if (Model.FiveDayForecast[i].LowTempF <= LowTempDanger)
+                    {
+                        <li>Be Aware of the Dangers of Exposure to Frigid Temperatures</li>
+                    }
+                    <li>Have a great day!</li>
+                </ul>
+            </div>
+        }
+        else
+        {
+            <div>High: @high</div>
+            <div>Low: @low</div>
+        }
+    </div>
+}

@@ -32,7 +32,7 @@ namespace Capstone.Web
             });
             
             // Getting the connection string from appsettings.json
-            string connectionString = Configuration["ConnectionStrings: default"];
+            string connectionString = Configuration["ConnectionStrings:default"];
 
             services.AddTransient<IParksDAL>(d => new ParksDAL(connectionString));
             services.AddTransient<ISurveyDAL>(d => new SurveyDAL(connectionString));
