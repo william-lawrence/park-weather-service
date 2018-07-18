@@ -8,6 +8,11 @@ namespace Capstone.Web.Models
 	public class Park
 	{
 		/// <summary>
+		/// Represents A short String that uniquely identifies a park.
+		/// </summary>
+		public string Code { get; set; }
+
+		/// <summary>
 		/// Represents the Park's Name
 		/// </summary>
 		public string Name { get; set; }
@@ -18,47 +23,48 @@ namespace Capstone.Web.Models
 		public string State { get; set; }
 
 		/// <summary>
-		/// Represents the Park's Acreage
+		/// Represents the Size of the park in acres
 		/// </summary>
 		public int Acreage { get; set; }
 
 		/// <summary>
-		/// Represents the Park's Evelvatoin in feet
+		/// Represents the Park's Evelvatoin in feet above sea level
 		/// </summary>
 		public int ElevationInFeet { get; set; }
 
 		/// <summary>
-		/// Represents the miles of trail in the Park
+		/// Represents the The combined length of all hiking trails in the park
+
 		/// </summary>
 		public double MilesOfTrail { get; set; }
 
 		/// <summary>
-		/// Represents thenumber of campsties in the Park
+		/// Represents The total number of campsites available for visitors in the park
 		/// </summary>
 		public int NumberOfCampsites { get; set; }
 
 		/// <summary>
-		/// Represents the Park's climate
+		/// Represents A general description of the park’s climate (e.g. “Desert”)
 		/// </summary>
 		public string Climate { get; set; }
 
 		/// <summary>
-		/// Represents the year the Park was founded
+		/// Represents The year the park joined the National Park System
 		/// </summary>
 		public int YearFounded { get; set; }
 
 		/// <summary>
-		/// Represents the Park's Annual Vistor Count
+		/// Represents The average number of visitors to the park on a annual basis
 		/// </summary>
 		public int AnnualVisitorCount { get; set; }
 
 		/// <summary>
-		/// Represents the an Quote relevent to the Park
+		/// Represents A famous quote related to the park
 		/// </summary>
 		public string InspirationalQuote { get; set; }
 
 		/// <summary>
-		/// Represents the Source of the inspirational quote
+		/// Represents The person to whom the inspirational quote is attributed
 		/// </summary>
 		public string InspirationalQuoteSource { get; set; }
 
@@ -68,12 +74,12 @@ namespace Capstone.Web.Models
 		public string Description { get; set; }
 
 		/// <summary>
-		/// Represents the Park's entry fee
+		/// Represents The cost to enter the park in dollars
 		/// </summary>
 		public int EntryFee { get; set; }
 
 		/// <summary>
-		/// Represents the number of animal species in the park
+		/// Represents The number of different animal species that can be found within the boundaries of the park
 		/// </summary>
 		public int NumberOfAnimalSpecies { get; set; }
 

@@ -1,1 +1,37 @@
-body{padding-top:50px;padding-bottom:20px}.body-content{padding-left:15px;padding-right:15px}.carousel-caption p{font-size:20px;line-height:1.4}.carousel-inner .item img[src$=".svg"]{width:100%}#qrCode{margin:15px}@media screen and (max-width:767px){.carousel-caption{display:none}}
+body {
+    padding-top: 50px;
+    padding-bottom: 20px
+}
+
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px
+}
+
+.home-park {
+    display: block;
+}
+
+.home-park-img {
+    display: inline-block
+}
+
+    .home-park-img img {
+        width: 300px;
+        height:auto;
+    }
+
+.home-park-text {
+    display: inline-block;
+}
+
+.title {
+    display: block;
+    font-weight: bold;
+    font-size: 2em;
+    color: black;
+}
+
+.description {
+    display: block
+}

@@ -26,8 +26,14 @@ namespace Capstone.Web.Controllers
 
         public IActionResult Index()
         {
-            return View();
-        }      
+			IList<Park> parks = ParksDAL.GetAllParks();
+            return View(parks);
+        }
+
+		public IActionResult Detail(string code)
+		{
+			return View();
+		}
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

@@ -1,7 +1,12 @@
-﻿
+﻿@model Park
 @{
     ViewData["Title"] = "Detail";
 }
 
-<h2>Detail</h2>
+<img src="~/images/@(Model.Code).jpg"/>
 
+<h2>@Model.Name</h2>
+
+<p>@Model.Description</p>
+
+<p></p>
