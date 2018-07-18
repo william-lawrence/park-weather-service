@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace Capstone.Web.DAL
 {
+<<<<<<< HEAD
     public class WeatherDAL : IWeatherDAL
     {
         /// <summary>
@@ -21,4 +22,9 @@ namespace Capstone.Web.DAL
             this.ConnectionString = connectionString;
         }
     }
+=======
+	public class WeatherDAL : IWeatherDAL
+	{
+	}
+>>>>>>> c2db8c6dc3029bffd8a5c7ea266f1565f4801fee
 }
