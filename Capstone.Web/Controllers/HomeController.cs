@@ -9,36 +9,39 @@ using Capstone.Web.DAL;
 
 namespace Capstone.Web.Controllers
 {
-    public class HomeController : Controller
-    {
-        // Dependency Injection
+	public class HomeController : Controller
+	{
+		// Dependency Injection
 
-        private readonly IParksDAL ParksDAL;
-        private readonly IWeatherDAL WeatherDAL;
-        private readonly ISurveyDAL SurveyDAL;
+		private readonly IParksDAL ParksDAL;
+		private readonly IWeatherDAL WeatherDAL;
+		private readonly ISurveyDAL SurveyDAL;
 
-        public HomeController(IParksDAL parksDAL, IWeatherDAL weatherDAL, ISurveyDAL surveyDAL)
-        {
-            this.ParksDAL = parksDAL;
-            this.WeatherDAL = weatherDAL;
-            this.SurveyDAL = surveyDAL;
-        }
+		public HomeController(IParksDAL parksDAL, IWeatherDAL weatherDAL, ISurveyDAL surveyDAL)
+		{
+			this.ParksDAL = parksDAL;
+			this.WeatherDAL = weatherDAL;
+			this.SurveyDAL = surveyDAL;
+		}
 
-        public IActionResult Index()
-        {
+		public IActionResult Index()
+		{
 			IList<Park> parks = ParksDAL.GetAllParks();
-            return View(parks);
-        }
+			return View(parks);
+		}
 
 		public IActionResult Detail(string code)
 		{
-			return View();
+			code = Convert.ToString(ViewData["code"]);
+			Park park = ParksDAL.GetPark(code);
+			park.FiveDayForecast = WeatherDAL.GetForecast(code);
+			return View(park);
 		}
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-    }
+		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+		public IActionResult Error()
+		{
+			return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+		}
+	}
 }

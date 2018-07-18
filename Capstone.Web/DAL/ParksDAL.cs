@@ -49,6 +49,32 @@ namespace Capstone.Web.DAL
 			return parks;
 		}
 
+		public Park GetPark(string code)
+		{
+			Park park = new Park();
+			try
+			{
+				using (SqlConnection conn = new SqlConnection(ConnectionString))
+				{
+					conn.Open();
+
+					string sql = $"SELECT * FROM park WHERE parkcode = {code};";
+					SqlCommand cmd = new SqlCommand(sql, conn);
+					SqlDataReader reader = cmd.ExecuteReader();
+
+					while (reader.Read())
+					{
+						park = TranslateReaderToPark(reader);
+					}
+				}
+			}
+			catch (SqlException ex)
+			{
+				Console.WriteLine(ex.Message);
+			}
+			return park;
+		}
+
 		private Park TranslateReaderToPark(SqlDataReader reader)
 		{
 			Park park = new Park();
