@@ -1,7 +1,45 @@
-﻿
+﻿@model SurveyResult
 @{
     ViewData["Title"] = "Survey";
 }
 
-<h2>Survey</h2>
+<body>
+    <h2>Park Survey:</h2>
+    <div>
+        <form asp-controller="Home" asp-action="Survey" method="post">
+
+            <label>Pick Your Favorite Park</label>
+            <select asp-for="ParkCode" asp-items="@SurveyResult.Parks"></select>
+            <br />
+
+            <label>Email</label>
+            <input asp-for="EmailAddress" />
+            <br />
+
+
+
+            <label>Activity Level</label>
+            <br />
+
+            <input value="Inactive" type="radio" asp-for="ActivityLevel" />
+            <label>Inactive</label>
+            <br />
+
+            <input value="Sedentary" type="radio" asp-for="ActivityLevel" />
+            <label>Sedentary</label>
+            <br />
+
+            <input value="Active" type="radio" asp-for="ActivityLevel" />
+            <label>Active</label>
+            <br />
+
+            <input value="Extremely Active" type="radio" asp-for="ActivityLevel" />
+            <label>Extremely Active</label>
+            <br />
+
+            <input type="submit" value="Submit" />
+        </form>
+    </div>
+
+</body>
 
