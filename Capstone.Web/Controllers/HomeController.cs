@@ -27,36 +27,43 @@ namespace Capstone.Web.Controllers
 			this.SurveyDAL = surveyDAL;
 		}
 
-        public IActionResult Index()
-        {
-        	IList<Park> parks = ParksDAL.GetAllParks();
+		public IActionResult Index()
+		{
+			IList<Park> parks = ParksDAL.GetAllParks();
 			return View(parks);
-        }  
-        
-        [HttpGet]
-        public IActionResult Survey()
-        {
-            return View();
-        }
+		}
 
-        [HttpPost]
-        [AutoValidateAntiforgeryToken]
-        public IActionResult Survey(SurveyResult result)
-        {
-            SurveyDAL.AddNewSurvey(result);
-            return RedirectToAction("Index", "Home");
-        }
+		[HttpGet]
+		public IActionResult Survey()
+		{
+			return View();
+		}
+
+		[HttpPost]
+		[AutoValidateAntiforgeryToken]
+		public IActionResult Survey(SurveyResult result)
+		{
+			SurveyDAL.AddNewSurvey(result);
+			return RedirectToAction("Index", "Home");
+		}
 
 		public IActionResult Detail(string code)
 		{
 			Park park = ParksDAL.GetPark(code);
 			park.FiveDayForecast = WeatherDAL.GetForecast(code);
-			return View(park);
+			if (park != new Park())
+			{
+				return View(park);
+			}
+			else
+			{
+				return RedirectToAction("Error");
+			}
 		}
 
 		public IActionResult ChangeUnits(string code, string unit)
 		{
-			HttpContext.Session.Set(Temp_Unit_Choice,unit);
+			HttpContext.Session.Set(Temp_Unit_Choice, unit);
 			return RedirectToAction("Detail", "Home", code);
 		}
 
