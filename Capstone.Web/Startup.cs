@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Capstone.Web.DAL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -29,7 +30,13 @@ namespace Capstone.Web
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+            
+            // Getting the connection string from appsettings.json
+            string connectionString = Configuration["ConnectionStrings: default"];
 
+            services.AddTransient<IParksDAL>(d => new ParksDAL(connectionString));
+            services.AddTransient<ISurveyDAL>(d => new SurveyDAL(connectionString));
+            services.AddTransient<IWeatherDAL>(d => new WeatherDAL(connectionString));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
