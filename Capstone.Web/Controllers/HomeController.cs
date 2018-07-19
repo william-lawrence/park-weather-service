@@ -65,12 +65,19 @@ namespace Capstone.Web.Controllers
 		{
 			Park park = ParksDAL.GetPark(code);
 			park.FiveDayForecast = WeatherDAL.GetForecast(code);
-			return View(park);
+			if (park != new Park())
+			{
+				return View(park);
+			}
+			else
+			{
+				return RedirectToAction("Error");
+			}
 		}
 
 		public IActionResult ChangeUnits(string code, string unit)
 		{
-			HttpContext.Session.Set(Temp_Unit_Choice,unit);
+			HttpContext.Session.Set(Temp_Unit_Choice, unit);
 			return RedirectToAction("Detail", "Home", code);
 		}
 

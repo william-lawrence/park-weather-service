@@ -22,13 +22,15 @@
 </p>
 
 <h3>Five Day Forecast</h3>
-<a asp-controller="Home" asp-action="ChangeUnits" asp-route-code="@Model.Code" asp-route-unit="F">F</a>
-<a asp-controller="Home" asp-action="ChangeUnits" asp-route-code="@Model.Code" asp-route-unit="C">C</a>
-<a asp-controller="Home" asp-action="ChangeUnits" asp-route-code="@Model.Code" asp-route-unit="K">K</a>
-
-@for (int i = 0; i < Model.FiveDayForecast.Count; i++)
+<div>
+    <a asp-controller="Home" asp-action="ChangeUnits" asp-route-code="@Model.Code" asp-route-unit="F">F</a>
+    <a asp-controller="Home" asp-action="ChangeUnits" asp-route-code="@Model.Code" asp-route-unit="C">C</a>
+    <a asp-controller="Home" asp-action="ChangeUnits" asp-route-code="@Model.Code" asp-route-unit="K">K</a>
+</div>
+@for (int i = 0; i < Model.FiveDayForecast.Count && i < 5; i++)
 {
     <div class="weather-@((i==0)?"big":"small")">
+        <center>@DateTime.Today.AddDays(i).DayOfWeek</center>
         <img src="~/images/weather/@(new string(Model.FiveDayForecast[i].Forecast.Where(c => !Char.IsWhiteSpace(c)).ToArray())).png" alt="@Model.FiveDayForecast[i].Forecast" />
         @{
             string high = "";
@@ -51,7 +53,7 @@
         }
         @if (i == 0)
         {
-            <div>High: @high  Low:@low</div>
+            <div>High: @high   Low: @low</div>
             <div>
                 Just Remember:
                 <ul>

@@ -69,11 +69,34 @@ body {
 }
 
 .weather-big {
+    display: inline-block;
+    max-width: 250px;
+    padding-right: 40px;
 }
 
-.weathe-small {
+    .weather-big img {
+        width: 200px;
+        height: auto;
+    }
+
+    .weather-big center{
+        font-weight:bold;
+        font-size:1.5em;
+    }
+
+.weather-small {
+    display: inline-block;
+    max-width: 200px;
+    padding-right: 10px;
 }
 
+    .weather-small img {
+        width: 150px;
+        height: auto;
+    }
+    .weather-small center{
+        font-weight:bold;
+    }
 .validation-error {
     color: red;
     font-weight: bold;
