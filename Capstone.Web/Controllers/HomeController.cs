@@ -40,18 +40,19 @@ namespace Capstone.Web.Controllers
             return View();
         }
 
-        [HttpGet]
-        public IActionResult FavoritePark()
-        {
-            return View();
-        }
-
         [HttpPost]
         [AutoValidateAntiforgeryToken]
         public IActionResult Survey(SurveyResult result)
         {
             SurveyDAL.AddNewSurvey(result);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("FavoritePark", "Home");
+        }
+
+        [HttpGet]
+        public IActionResult FavoritePark()
+        {
+            var bestPark = SurveyDAL.GetBestPark();
+            return View(bestPark);
         }
 
 		public IActionResult Detail(string code)

@@ -136,3 +136,7 @@ body {
     .navbar a {
         color: #94ebd8;
     }
+.winner{
+    font-weight: bold;
+    font-size: 4rem;
+}

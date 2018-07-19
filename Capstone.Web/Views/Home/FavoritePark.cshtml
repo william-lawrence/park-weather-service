@@ -1,7 +1,10 @@
-﻿
+﻿@model Park
 @{
     ViewData["Title"] = "FavoritePark";
 }
 
-<h2>FavoritePark</h2>
-
+<body>
+    <h2>The favorite park as voted by users:</h2>
+    <h1 class="winner">@Model.Name</h1>
+    <img src="~/images/parks/@(Model.Code).jpg" />
+</body>
