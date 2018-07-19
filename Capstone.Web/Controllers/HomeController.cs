@@ -28,13 +28,6 @@ namespace Capstone.Web.Controllers
 
 		private const string Temp_Unit_Choice = "Temp_Unit_Choice";
 
-		public HomeController(IParksDAL parksDAL, IWeatherDAL weatherDAL, ISurveyDAL surveyDAL)
-		{
-			this.ParksDAL = parksDAL;
-			this.WeatherDAL = weatherDAL;
-			this.SurveyDAL = surveyDAL;
-		}
-
         public IActionResult Index()
         {
             IList<Park> parks = ParksDAL.GetAllParks();
@@ -47,18 +40,19 @@ namespace Capstone.Web.Controllers
             return View();
         }
 
-        [HttpGet]
-        public IActionResult FavoritePark()
-        {
-            return View();
-        }
-
         [HttpPost]
         [AutoValidateAntiforgeryToken]
         public IActionResult Survey(SurveyResult result)
         {
             SurveyDAL.AddNewSurvey(result);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("FavoritePark", "Home");
+        }
+
+        [HttpGet]
+        public IActionResult FavoritePark()
+        {
+            var bestPark = SurveyDAL.GetBestPark();
+            return View(bestPark);
         }
 
 		public IActionResult Detail(string code)

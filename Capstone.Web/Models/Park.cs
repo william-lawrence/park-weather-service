@@ -33,7 +33,7 @@ namespace Capstone.Web.Models
 		public int ElevationInFeet { get; set; }
 
 		/// <summary>
-		/// Represents the The combined length of all hiking trails in the park
+		/// Represents the combined length of all hiking trails in the park
 
 		/// </summary>
 		public double MilesOfTrail { get; set; }
