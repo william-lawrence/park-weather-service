@@ -8,6 +8,44 @@ namespace Capstone.Web.Models
 	public class Weather
 	{
 		/// <summary>
+		/// Returns the low tempurature in the user's unit preference
+		/// </summary>
+		public string LowTemp
+		{
+			get
+			{
+				if (this.UnitPrefence == "C")
+				{
+					return ConvertFtoC(this.LowTempF) + "°C";
+				}
+				else if (this.UnitPrefence == "K")
+				{
+					return ConvertFtoK(this.LowTempF) + "K";
+				}
+				return this.LowTempF + "°F";
+			}
+		}
+
+		/// <summary>
+		/// Returns the high tempurature in the user's unit preference
+		/// </summary>
+		public string HighTemp
+		{
+			get
+			{
+				if (this.UnitPrefence == "C")
+				{
+					return ConvertFtoC(this.HighTempF) + "°C";
+				}
+				else if (this.UnitPrefence == "K")
+				{
+					return ConvertFtoK(this.HighTempF) + "K";
+				}
+				return this.HighTempF + "°F";
+			}
+		}
+
+		/// <summary>
 		/// Represents the lowest temperature forcasted for the day in Fahrenheit
 		/// </summary>
 		public int LowTempF { get; set; }
@@ -18,53 +56,14 @@ namespace Capstone.Web.Models
 		public int HighTempF { get; set; }
 
 		/// <summary>
-		/// Represents the lowest temperature forcasted for the day in Celcius
+		/// Holds the user's prefered unit of temperature measure
 		/// </summary>
-		public int LowTempC
-		{
-			get
-			{
-				return ConvertFtoC(this.LowTempF);
-			}
-		}
-
-		/// <summary>
-		/// Represents the highest temperature forcasted for the day in Celcius
-		/// </summary>
-		public int HighTempC
-		{
-			get
-			{
-				return ConvertFtoC(this.HighTempF);
-			}
-		}
-
-		/// <summary>
-		/// Represents the lowest temperature forcasted for the day in Kelvins
-		/// </summary>
-		public int LowTempK
-		{
-			get
-			{
-				return ConvertCtoK(ConvertFtoC(this.LowTempF));
-			}
-		}
-
-		/// <summary>
-		/// Represents the highest temperature forcasted for the day in Kelvins
-		/// </summary>
-		public int HighTempK
-		{
-			get
-			{
-				return ConvertCtoK(ConvertFtoC(this.HighTempF));
-			}
-		}
-
+		public string UnitPrefence { get; set; }
+		
 		/// <summary>
 		/// Represents the forcasted weather for the day (e.g. Sunny, Rain, etc.)
 		/// </summary>
-		public string Forecast { get; set; }
+		public string Forecast { get; set; }		
 
 		/// <summary>
 		/// Converts the given Fahrenheit temperature to Celcius
@@ -80,12 +79,13 @@ namespace Capstone.Web.Models
 		}
 
 		/// <summary>
-		/// Converts the given Celcius temperature to Kelvins
+		/// Converts the given Fahrenheit temperature to Kelvins
 		/// </summary>
-		/// <param name="temp">A temp in °C</param>
+		/// <param name="temp">A temp in °F</param>
 		/// <returns>The converted temp in Kelvins</returns>
-		private int ConvertCtoK(int temp)
+		private int ConvertFtoK(int temp)
 		{
+			temp = ConvertFtoC(temp);
 			temp += 273;
 			return temp;
 		}

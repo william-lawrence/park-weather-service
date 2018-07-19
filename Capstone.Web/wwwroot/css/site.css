@@ -1,10 +1,16 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification\ 
 for details on configuring this project to bundle and minify static web assets. */
 body {
-    padding-top: 50px;
     padding-bottom: 20px;
+    background: linear-gradient(to bottom right, rgb(0, 121, 57),rgb(0, 179, 73));
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #003d34;
 }
 
+    body a {
+        color: #00787A;
+    }
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
@@ -44,16 +50,19 @@ body {
 .home-park-img {
     display: inline-block;
     padding-right: 15px;
+    vertical-align: top;
 }
 
     .home-park-img img {
         width: 300px;
         height: auto;
+        border-radius: 4px;
     }
 
 .home-park-text {
     display: inline-block;
     max-width: 800px;
+    vertical-align: top;
 }
 
 .title {
@@ -72,6 +81,7 @@ body {
     display: inline-block;
     max-width: 250px;
     padding-right: 40px;
+    vertical-align: top;
 }
 
     .weather-big img {
@@ -79,29 +89,53 @@ body {
         height: auto;
     }
 
-    .weather-big center{
-        font-weight:bold;
-        font-size:1.5em;
+    .weather-big center {
+        font-weight: bold;
+        font-size: 1.5em;
     }
 
 .weather-small {
     display: inline-block;
     max-width: 200px;
     padding-right: 10px;
+    vertical-align: top;
 }
 
     .weather-small img {
         width: 150px;
         height: auto;
     }
-    .weather-small center{
-        font-weight:bold;
+
+    .weather-small center {
+        font-weight: bold;
     }
+
 .validation-error {
     color: red;
     font-weight: bold;
 }
 
+.header-img {
+    width: 50%;
+    vertical-align: top;
+}
+
+.detail-img {
+    width: 50%;
+    border-radius: 4px;
+}
+
+.unit-swap a {
+    color: #94ebd8;
+}
+
+.navbar {
+    background: #003d34;
+}
+
+    .navbar a {
+        color: #94ebd8;
+    }
 .winner{
     font-weight: bold;
     font-size: 4rem;
