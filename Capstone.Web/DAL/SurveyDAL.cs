@@ -74,9 +74,9 @@ namespace Capstone.Web.DAL
         /// Creates a list of parks ordered by number of appearances in survey results (most to least).
         /// </summary>
         /// <returns>A list of parks order by number of appearances in the database (Most to least)</returns>
-        public IList<Park> GetParksByRank()
+        public Park GetBestPark()
         {
-            IList<Park> parks = new List<Park>();
+            Park bestPark = new Park();
 
             try
             {
@@ -85,16 +85,14 @@ namespace Capstone.Web.DAL
                     connection.Open();
 
                     // SQL that gets all the park codes by rank of popularity.
-                    string sql = "SELECT parkCode FROM survey_result GROUP BY parkCode ORDER BY COUNT(survey_result.parkCode) DESC;";
+                    string sql = "SELECT TOP (1) parkCode FROM survey_result GROUP BY parkCode ORDER BY COUNT(survey_result.parkCode) DESC;";
 
                     SqlCommand command = new SqlCommand(sql, connection);
 
                     SqlDataReader reader = command.ExecuteReader();
-
-                    while (reader.Read())
-                    {
-                        parks.Add(MapRowToPark(reader));
-                    }
+                    reader.Read();
+                    bestPark.Code = reader.GetString(0);
+                    bestPark.Name = CodeToParkName[bestPark.Code];
                 }
             }
             catch (SqlException ex)
@@ -102,7 +100,7 @@ namespace Capstone.Web.DAL
                 throw ex;
             }
 
-            return parks;
+            return bestPark;
         }
 
         private Park MapRowToPark(SqlDataReader reader)

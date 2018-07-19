@@ -1,10 +1,10 @@
-﻿@model IList<Park>
+﻿@model Park
 @{
     ViewData["Title"] = "FavoritePark";
 }
 
 <body>
     <h2>The favorite park as voted by users:</h2>
-    <h1 class="winner">@Model[0].Name</h1>
-    <img src="~/images/parks/@(Model[0].Code).jpg" />
+    <h1 class="winner">@Model.Name</h1>
+    <img src="~/images/parks/@(Model.Code).jpg" />
 </body>
