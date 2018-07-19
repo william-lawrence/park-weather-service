@@ -10,16 +10,37 @@
 
 
 <div class="card">
-    <p>@Model.Description</p>
-
     <p>
         Welcome to @Model.Name located in the @Model.Climate.ToLower() climate of @Model.State!
-        @Model.Name joined the ranks of the National Parks in @Model.YearFounded and covers an area of @Model.Acreage.ToString("N0") acres at an elevation of @(Model.ElevationInFeet)ft. above sea level.
-        We boast an immense @Model.MilesOfTrail miles of hiking trails and @Model.NumberOfCampsites campsites available to the public.
+        @Model.Name joined the ranks of the National Parks in @Model.YearFounded and covers an area of @Model.Acreage.ToString("N0") acres at an elevation of @(Model.ElevationInFeet.ToString("N0"))ft. above sea level.
+        We boast an immense @Model.MilesOfTrail miles of hiking trails
+        @if (@Model.NumberOfCampsites != 0)
+        {
+            <text> and @Model.NumberOfCampsites campsites</text>
+        }
+        available to the public.
         You might see as many as @Model.NumberOfAnimalSpecies types of animals here, like maybe a fox or a moose!
-        @Model.InspirationalQuoteSource once said about us, "@Model.InspirationalQuote" So come check it out and see for yourself!
-        Admission is just a modest @Model.EntryFee.ToString("C"). The @Model.AnnualVisitorCount.ToString("N0") people that come see us every year can't be wrong!
+        @if (@Model.InspirationalQuoteSource != "Unknow")
+        {
+            <text> @Model.InspirationalQuoteSource</text>
+        }
+        else
+        {
+            <text>Someone </text>
+        }
+        once said about us, "@Model.InspirationalQuote" So come check it out and see for yourself!
+        Admission is
+        @if (@Model.EntryFee != 0)
+        {
+            <text> just a modest @Model.EntryFee.ToString("C"). </text>
+        }
+        else
+        {
+            <text>free, so you've got no excuse! </text>
+        }
+        The @Model.AnnualVisitorCount.ToString("N0") people that come see us every year can't be wrong!
     </p>
+    <p>@Model.Description</p>
 </div>
 <h3>Five Day Forecast</h3>
 <div class="card">
