@@ -179,6 +179,10 @@ h2 {
     margin-top: 0px;
 }
 
+p{
+    text-indent:2em;
+}
+
 .inquiry {
     width: 165px;
     text-align: right

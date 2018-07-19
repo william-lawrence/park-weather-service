@@ -68,7 +68,7 @@ namespace Capstone.Web.Controllers
 			}
 
 			// Only display the page, if the park was found
-			if (park.Code != null)
+			if (park.Code == code)
 			{
 				return View(park);
 			}
