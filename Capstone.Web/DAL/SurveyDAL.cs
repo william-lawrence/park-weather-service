@@ -59,7 +59,7 @@ namespace Capstone.Web.DAL
                     command.Parameters.AddWithValue("@parkCode", survey.ParkCode);
                     command.Parameters.AddWithValue("@emailAddress", survey.EmailAddress);
                     command.Parameters.AddWithValue("@activityLevel", survey.ActivityLevel);
-                    command.Parameters.AddWithValue("@state", CodeToState[survey.ParkCode]);
+                    command.Parameters.AddWithValue("@state", survey.State);
 
                     command.ExecuteNonQuery();
                 }
