@@ -28,13 +28,12 @@ namespace Capstone.Web.Models
 		public int Acreage { get; set; }
 
 		/// <summary>
-		/// Represents the Park's Evelvatoin in feet above sea level
+		/// Represents the Park's elevation in feet above sea level
 		/// </summary>
 		public int ElevationInFeet { get; set; }
 
 		/// <summary>
 		/// Represents the combined length of all hiking trails in the park
-
 		/// </summary>
 		public double MilesOfTrail { get; set; }
 
@@ -87,5 +86,10 @@ namespace Capstone.Web.Models
 		/// Represents A five day forecast for the Park
 		/// </summary>
 		public IList<Weather> FiveDayForecast { get; set; }
+
+        /// <summary>
+        /// The number of times that a park is selected as favorite in the survey_results table in the park db.
+        /// </summary>
+        public int NumberOfVotes { get; set; }
 	}
 }
