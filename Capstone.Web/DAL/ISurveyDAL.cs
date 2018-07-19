@@ -9,5 +9,6 @@ namespace Capstone.Web.DAL
     public interface ISurveyDAL
     {
         void AddNewSurvey(SurveyResult survey);
+        IList<Park> GetParksByRank();
     }
 }

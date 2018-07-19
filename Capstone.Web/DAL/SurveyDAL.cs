@@ -15,21 +15,21 @@ namespace Capstone.Web.DAL
         private readonly string ConnectionString;
 
         /// <summary>
-        /// Dictionary that is used to determine the state where a park resides. 
-        /// This needs to be updated when a park is added or removed from the database.
+        /// Dictionary that is used to determine the name of the park given the park code.
+        /// The park name is not included in the database. 
         /// </summary>
-        private readonly Dictionary<string, string> CodeToState = new Dictionary<string, string>()
+        private readonly Dictionary<string, string> CodeToParkName = new Dictionary<string, string>()
         {
-            {"CVNP", "Ohio" },
-            {"ENP", "Florida" },
-            {"GCNP", "Arizona" },
-            {"GNP", "Montana" },
-            {"GSMNP", "Tennessee" },
-            {"GTNP", "Wyoming" },
-            {"MRNP", "Washington" },
-            {"RMNP", "Colorado" },
-            {"YNP", "Wyoming" },
-            {"YNP2", "California" }
+            {"CVNP", "Cuyahoga Valley National Park" },
+            {"ENP", "Everglades National Park" },
+            {"GCNP", "Grand Canyon National Park" },
+            {"GNP", "Glacier National Park" },
+            {"GSMNP", "Great Smoky Mountains National Park" },
+            {"GTNP", "Grand Teton National Park" },
+            {"MRNP", "Mount Rainier National Park" },
+            {"RMNP", "Rocky Mountain National Park" },
+            {"YNP", "Yellowstone National Park" },
+            {"YNP2", "Yosemite National Park" }
         };
           
         /// <summary>
@@ -70,5 +70,50 @@ namespace Capstone.Web.DAL
             }
         }
 
+        /// <summary>
+        /// Creates a list of parks ordered by number of appearances in survey results (most to least).
+        /// </summary>
+        /// <returns>A list of parks order by number of appearances in the database (Most to least)</returns>
+        public IList<Park> GetParksByRank()
+        {
+            IList<Park> parks = new List<Park>();
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(ConnectionString))
+                {
+                    connection.Open();
+
+                    // SQL that gets all the park codes by rank of popularity.
+                    string sql = "SELECT parkCode FROM survey_result GROUP BY parkCode ORDER BY COUNT(survey_result.parkCode) DESC;";
+
+                    SqlCommand command = new SqlCommand(sql, connection);
+
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        parks.Add(MapRowToPark(reader));
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+
+            return parks;
+        }
+
+        private Park MapRowToPark(SqlDataReader reader)
+        {
+            Park park = new Park
+            {
+                Code = Convert.ToString(reader["parkCode"]),
+                Name = CodeToParkName[Convert.ToString(reader["parkCode"])] // Getting the park name using the CodeToParkName dictionary.
+            };
+
+            return park;
+        }
     }
 }

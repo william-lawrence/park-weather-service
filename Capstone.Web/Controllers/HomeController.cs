@@ -45,13 +45,14 @@ namespace Capstone.Web.Controllers
         public IActionResult Survey(SurveyResult result)
         {
             SurveyDAL.AddNewSurvey(result);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("FavoritePark", "Home");
         }
 
         [HttpGet]
         public IActionResult FavoritePark()
         {
-            return View();
+            var parks = SurveyDAL.GetParksByRank();
+            return View(parks);
         }
 
 		public IActionResult Detail(string code)
