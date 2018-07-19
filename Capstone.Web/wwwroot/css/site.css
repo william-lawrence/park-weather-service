@@ -97,3 +97,7 @@ body {
     .weather-small center{
         font-weight:bold;
     }
+.validation-error {
+    color: red;
+    font-weight: bold;
+}

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -16,11 +17,14 @@ namespace Capstone.Web.Models
         /// <summary>
         /// The code used to represent the park.
         /// </summary>
+        [Required]
         public string ParkCode { get; set; }
 
         /// <summary>
         /// The email address of the user that submitted the survey
         /// </summary>
+        [Required(ErrorMessage = "* Required")]
+        [EmailAddress]
         public string EmailAddress { get; set; }
 
         /// <summary>
@@ -31,6 +35,7 @@ namespace Capstone.Web.Models
         /// <summary>
         /// The activity level of the user that submitted the survey.
         /// </summary>
+        [Required(ErrorMessage = "* Required")]
         public string ActivityLevel { get; set; }
 
         /// <summary>
