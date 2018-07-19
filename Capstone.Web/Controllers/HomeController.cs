@@ -51,8 +51,8 @@ namespace Capstone.Web.Controllers
         [HttpGet]
         public IActionResult FavoritePark()
         {
-            var bestPark = SurveyDAL.GetBestPark();
-            return View(bestPark);
+            var parks = SurveyDAL.GetParkRankings();
+            return View(parks);
         }
 
 		public IActionResult Detail(string code)
