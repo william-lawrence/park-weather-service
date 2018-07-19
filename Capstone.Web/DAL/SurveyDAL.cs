@@ -84,15 +84,16 @@ namespace Capstone.Web.DAL
                 {
                     connection.Open();
 
-                    // SQL that gets all the park codes by rank of popularity.
+                    // SQL that gets the park code for the park that appears most in the database.
                     string sql = "SELECT TOP (1) parkCode FROM survey_result GROUP BY parkCode ORDER BY COUNT(survey_result.parkCode) DESC;";
 
                     SqlCommand command = new SqlCommand(sql, connection);
 
                     SqlDataReader reader = command.ExecuteReader();
-                    reader.Read();
-                    bestPark.Code = reader.GetString(0);
-                    bestPark.Name = CodeToParkName[bestPark.Code];
+                    
+                    reader.Read(); // Moves to the row returned by the query.
+                    bestPark.Code = reader.GetString(0); // Sets the park code for the park with the most reviews.
+                    bestPark.Name = CodeToParkName[bestPark.Code]; // Sets the park name using the park code.
                 }
             }
             catch (SqlException ex)
@@ -101,17 +102,6 @@ namespace Capstone.Web.DAL
             }
 
             return bestPark;
-        }
-
-        private Park MapRowToPark(SqlDataReader reader)
-        {
-            Park park = new Park
-            {
-                Code = Convert.ToString(reader["parkCode"]),
-                Name = CodeToParkName[Convert.ToString(reader["parkCode"])] // Getting the park name using the CodeToParkName dictionary.
-            };
-
-            return park;
         }
     }
 }
