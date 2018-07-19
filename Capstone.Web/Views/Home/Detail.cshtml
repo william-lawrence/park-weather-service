@@ -5,30 +5,31 @@
     int TempDifferenceAdvisory = 20;
     int LowTempDanger = 20;
 }
-
+<h2>@Model.Name</h2>
 <img class="detail-img" src="~/images/parks/@(Model.Code).jpg" alt="@Model.Name" />
 
-<h2>@Model.Name</h2>
-
-<p>@Model.Description</p>
-
-<p>
-    Welcome to @Model.Name located in the @Model.Climate climate of @Model.State!
-    @Model.Name joined the ranks of the National Parks in @Model.YearFounded and covers an area of @Model.Acreage.ToString("N0") acres at an elevation of @(Model.ElevationInFeet)ft. above sea level.
-    We boast an immense @Model.MilesOfTrail miles of hiking trails and @Model.NumberOfCampsites campsites available to the public.
-    You might see as many as @Model.NumberOfAnimalSpecies types of animals here, like maybe a fox or a moose!
-    @Model.InspirationalQuoteSource once said about us, "@Model.InspirationalQuote" So come check it out and see for yourself!
-    Admission is just a modest @Model.EntryFee.ToString("C"). The @Model.AnnualVisitorCount.ToString("N0") people that come see us every year can't be wrong!
-</p>
 
 <div class="card">
-    <h3>Five Day Forecast</h3>
+    <p>@Model.Description</p>
+
+    <p>
+        Welcome to @Model.Name located in the @Model.Climate.ToLower() climate of @Model.State!
+        @Model.Name joined the ranks of the National Parks in @Model.YearFounded and covers an area of @Model.Acreage.ToString("N0") acres at an elevation of @(Model.ElevationInFeet)ft. above sea level.
+        We boast an immense @Model.MilesOfTrail miles of hiking trails and @Model.NumberOfCampsites campsites available to the public.
+        You might see as many as @Model.NumberOfAnimalSpecies types of animals here, like maybe a fox or a moose!
+        @Model.InspirationalQuoteSource once said about us, "@Model.InspirationalQuote" So come check it out and see for yourself!
+        Admission is just a modest @Model.EntryFee.ToString("C"). The @Model.AnnualVisitorCount.ToString("N0") people that come see us every year can't be wrong!
+    </p>
+</div>
+<h3>Five Day Forecast</h3>
+<div class="card">
     <div class="unit-swap">
         Change Temperature Units:
         <a asp-controller="Home" asp-action="ChangeUnits" asp-route-parkCode="@Model.Code" asp-route-unit="F">Fahrenheit</a> |
         <a asp-controller="Home" asp-action="ChangeUnits" asp-route-parkCode="@Model.Code" asp-route-unit="C">Celcius</a> |
         <a asp-controller="Home" asp-action="ChangeUnits" asp-route-parkCode="@Model.Code" asp-route-unit="K">Kelvin</a>
     </div>
+    <br />
     @for (int i = 0; i < Model.FiveDayForecast.Count && i < 5; i++)
     {
         <div class="weather-@((i==0)?"big":"small")">

@@ -1,14 +1,14 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification\ 
 for details on configuring this project to bundle and minify static web assets. */
 body {
-    --text-color: #334251;
-    --link-color: #4f745e;
-    --background-color1: #b7a56c;
+    --text-color: rgb(94, 59, 4);
+    --link-color: rgb(97, 109, 134);
+    --background-color1: rgb(43, 151, 217);
     --background-color2: #b7a56c;
-    --navbar-color: #6d6866;
-    --navbar-link-color: #818656;
+    --navbar-color: rgb(119, 136, 164);
+    --navbar-link-color: rgb(31, 201, 9);
     padding-bottom: 20px;
-    background: linear-gradient(to bottom right, var(--background-color1),var(--background-color2));
+    background: var(--background-color1);
     background-repeat: no-repeat;
     background-attachment: fixed;
     color: var(--text-color);
@@ -18,7 +18,11 @@ body {
         color: var(--link-color);
     }
 
-    
+        body a:hover {
+            color:
+        }
+
+
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
@@ -61,7 +65,7 @@ body {
     vertical-align: top;
 }
 
-.home-park-img img {
+    .home-park-img img {
         width: 300px;
         height: auto;
         border-radius: 4px;
@@ -96,12 +100,12 @@ hr {
     vertical-align: top;
 }
 
-.weather-big img {
+    .weather-big img {
         width: 200px;
         height: auto;
     }
 
-.weather-big center {
+    .weather-big center {
         font-weight: bold;
         font-size: 1.5em;
     }
@@ -113,12 +117,12 @@ hr {
     vertical-align: top;
 }
 
-.weather-small img {
+    .weather-small img {
         width: 150px;
         height: auto;
     }
 
-.weather-small center {
+    .weather-small center {
         font-weight: bold;
     }
 
@@ -133,8 +137,12 @@ hr {
 }
 
 .detail-img {
-    width: 50%;
-    border-radius: 4px;
+    margin-bottom: 15px;
+    position: relative;
+    display: block;
+    border-radius: 3px;
+    border: 1px solid #d6d6d6;
+    box-shadow: 3px 3px 0px #bababa;
 }
 
 .unit-swap a {
@@ -149,55 +157,33 @@ hr {
         color: var(--navbar-link-color);
     }
 
-.winner{
+.winner {
     font-weight: bold;
     font-size: 4rem;
 }
 
 .card {
-    width: calc(100% - 30px);
-    padding-top: 10px;
-    padding-right: 12px;
-    padding-bottom: 10px;
-    padding-left: 12px;
+    padding: 10px;
     margin-bottom: 15px;
     position: relative;
-    overflow: hidden;
-    overflow-x: hidden;
-    overflow-y: hidden;
-    background: white;
-    background-image: initial;
-    background-position-x: initial;
-    background-position-y: initial;
-    background-size: initial;
-    background-attachment: initial;
-    background-origin: initial;
-    background-clip: initial;
-    background-color: white;
+    background-color: var(--background-color2);
     display: block;
-    color: #0a0a0a;
     border-radius: 3px;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
-    border-bottom-right-radius: 3px;
-    border-bottom-left-radius: 3px;
-    border: 1px solid #d6d6d6;
-    border-top-color: rgb(214, 214, 214);
+    border: 1px #d6d6d6;
     border-top-style: solid;
-    border-top-width: 1px;
-    border-right-color: rgb(214, 214, 214);
-    border-right-style: solid;
-    border-right-width: 1px;
-    border-bottom-color: rgb(214, 214, 214);
     border-bottom-style: solid;
-    border-bottom-width: 1px;
-    border-left-color: rgb(214, 214, 214);
-    border-left-style: solid;
-    border-left-width: 1px;
-    border-image-source: initial;
-    border-image-slice: initial;
-    border-image-width: initial;
-    border-image-outset: initial;
-    border-image-repeat: initial;
     box-shadow: 3px 3px 0px #bababa;
+}
+
+h2 {
+    margin-top: 0px;
+}
+
+.inquiry {
+    width: 165px;
+    text-align: right
+}
+
+select {
+    width: 165px;
 }
