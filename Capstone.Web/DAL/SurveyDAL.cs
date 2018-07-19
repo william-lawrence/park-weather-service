@@ -31,7 +31,7 @@ namespace Capstone.Web.DAL
             {"YNP", "Yellowstone National Park" },
             {"YNP2", "Yosemite National Park" }
         };
-          
+
         /// <summary>
         /// Constructor that takes connection string.
         /// </summary>
@@ -74,9 +74,9 @@ namespace Capstone.Web.DAL
         /// Creates a list of parks ordered by number of appearances in survey results (most to least).
         /// </summary>
         /// <returns>A list of parks order by number of appearances in the database (Most to least)</returns>
-        public Park GetBestPark()
+        public IList<Park> GetParkRankings()
         {
-            Park bestPark = new Park();
+            IList<Park> parks = new List<Park>();
 
             try
             {
@@ -84,16 +84,18 @@ namespace Capstone.Web.DAL
                 {
                     connection.Open();
 
-                    // SQL that gets the park code for the park that appears most in the database.
-                    string sql = "SELECT TOP (1) parkCode FROM survey_result GROUP BY parkCode ORDER BY COUNT(survey_result.parkCode) DESC;";
+                    // SQL that gets the parks in the survey results, their code, 
+                    // the number of times they appeared, and their description.
+                    string sql = "SELECT COUNT(survey_result.surveyId) AS votes, survey_result.parkCode, park.parkName, park.parkDescription FROM survey_result INNER JOIN park ON survey_result.parkCode = park.parkCode GROUP BY survey_result.parkCode, park.parkName, park.parkDescription ORDER BY COUNT(survey_result.parkCode) DESC;";
 
                     SqlCommand command = new SqlCommand(sql, connection);
 
                     SqlDataReader reader = command.ExecuteReader();
-                    
-                    reader.Read(); // Moves to the row returned by the query.
-                    bestPark.Code = reader.GetString(0); // Sets the park code for the park with the most reviews.
-                    bestPark.Name = CodeToParkName[bestPark.Code]; // Sets the park name using the park code.
+
+                    while (reader.Read())
+                    {
+                        parks.Add(MapParkFromRow(reader));
+                    }
                 }
             }
             catch (SqlException ex)
@@ -101,7 +103,20 @@ namespace Capstone.Web.DAL
                 throw ex;
             }
 
-            return bestPark;
+            return parks;
+        }
+
+        private Park MapParkFromRow(SqlDataReader reader)
+        {
+            Park park = new Park
+            {
+                NumberOfVotes = Convert.ToInt32(reader["votes"]),
+                Code = Convert.ToString(reader["parkCode"]),
+                Name = Convert.ToString(reader["parkName"]),
+                Description = Convert.ToString(reader["parkDescription"])
+            };
+
+            return park;
         }
     }
 }

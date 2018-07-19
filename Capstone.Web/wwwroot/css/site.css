@@ -65,7 +65,7 @@ body {
     vertical-align: top;
 }
 
-    .home-park-img img {
+.home-park-img img {
         width: 300px;
         height: auto;
         border-radius: 4px;
@@ -175,6 +175,22 @@ hr {
     box-shadow: 3px 3px 0px #bababa;
 }
 
+.result-wrapper {
+    display: inline-grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "result-image result-text";
+}
+
+.result-image {
+    grid-area: result-image;
+}
+
+.result-text {
+    grid-area: result-text;
+}
+
+.votes {
+    font-weight: bold;
 h2 {
     margin-top: 0px;
 }
