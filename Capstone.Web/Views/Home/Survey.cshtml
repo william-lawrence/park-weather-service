@@ -8,16 +8,16 @@
     <div class="card">
         <form asp-controller="Home" asp-action="Survey" method="post">
 
-            <label>Pick Your Favorite Park:</label>
+            <label class="inquiry">Pick Your Favorite Park:</label>
             <select asp-for="ParkCode" asp-items="@SurveyResult.Parks"></select>
             <br />
 
-            <label>State of Residence:</label>
+            <label class="inquiry">State of Residence:</label>
             <select asp-for="State" asp-items="SurveyResult.States"></select>
             <br />
 
-            <label>Email:</label>
-            <input asp-for="EmailAddress" />
+            <label class="inquiry">Email:</label>
+            <input class="inquiry" asp-for="EmailAddress" />
             <span asp-validation-for="EmailAddress" class="validation-error"></span>
             <br />
 
