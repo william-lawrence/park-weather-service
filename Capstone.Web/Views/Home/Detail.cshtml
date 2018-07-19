@@ -6,7 +6,7 @@
     int LowTempDanger = 20;
 }
 
-<img src="~/images/parks/@(Model.Code).jpg" />
+<img class="detail-img" src="~/images/parks/@(Model.Code).jpg" />
 
 <h2>@Model.Name</h2>
 
@@ -22,38 +22,24 @@
 </p>
 
 <h3>Five Day Forecast</h3>
-<div>
-    <a asp-controller="Home" asp-action="ChangeUnits" asp-route-code="@Model.Code" asp-route-unit="F">F</a>
-    <a asp-controller="Home" asp-action="ChangeUnits" asp-route-code="@Model.Code" asp-route-unit="C">C</a>
-    <a asp-controller="Home" asp-action="ChangeUnits" asp-route-code="@Model.Code" asp-route-unit="K">K</a>
+<div class="unit-swap">
+    Change Temperature Units:
+    <a asp-controller="Home" asp-action="ChangeUnits" asp-route-parkCode="@Model.Code" asp-route-unit="F">Fahrenheit</a> |
+    <a asp-controller="Home" asp-action="ChangeUnits" asp-route-parkCode="@Model.Code" asp-route-unit="C">Celcius</a> |
+    <a asp-controller="Home" asp-action="ChangeUnits" asp-route-parkCode="@Model.Code" asp-route-unit="K">Kelvin</a>
 </div>
 @for (int i = 0; i < Model.FiveDayForecast.Count && i < 5; i++)
 {
     <div class="weather-@((i==0)?"big":"small")">
         <center>@DateTime.Today.AddDays(i).DayOfWeek</center>
-        <img src="~/images/weather/@(new string(Model.FiveDayForecast[i].Forecast.Where(c => !Char.IsWhiteSpace(c)).ToArray())).png" alt="@Model.FiveDayForecast[i].Forecast" />
+        <img src="~/images/weather/transparent/@(new string(Model.FiveDayForecast[i].Forecast.Where(c => !Char.IsWhiteSpace(c)).ToArray())).png" alt="@Model.FiveDayForecast[i].Forecast" />
         @{
-            string high = "";
-            string low = "";
-            if (true)
-            {
-                high = Model.FiveDayForecast[i].HighTempF.ToString() + "°F";
-                low = Model.FiveDayForecast[i].LowTempF.ToString() + "°F";
-            }
-            else if (true)
-            {
-                high = Model.FiveDayForecast[i].HighTempC.ToString() + "°C";
-                low = Model.FiveDayForecast[i].LowTempC.ToString() + "°C";
-            }
-            else
-            {
-                high = Model.FiveDayForecast[i].HighTempK.ToString() + "K";
-                low = Model.FiveDayForecast[i].LowTempK.ToString() + "K";
-            }
+            string high = Model.FiveDayForecast[i].HighTemp;
+            string low = Model.FiveDayForecast[i].LowTemp;
         }
         @if (i == 0)
         {
-            <div>High: @high   Low: @low</div>
+            <center>High: @high   Low: @low</center>
             <div>
                 Just Remember:
                 <ul>
@@ -93,8 +79,10 @@
         }
         else
         {
-            <div>High: @high</div>
-            <div>Low: @low</div>
+            <center>High: @high</center>
+            <center>Low: @low</center>
         }
     </div>
 }
+
+

@@ -28,13 +28,6 @@ namespace Capstone.Web.Controllers
 
 		private const string Temp_Unit_Choice = "Temp_Unit_Choice";
 
-		public HomeController(IParksDAL parksDAL, IWeatherDAL weatherDAL, ISurveyDAL surveyDAL)
-		{
-			this.ParksDAL = parksDAL;
-			this.WeatherDAL = weatherDAL;
-			this.SurveyDAL = surveyDAL;
-		}
-
         public IActionResult Index()
         {
             IList<Park> parks = ParksDAL.GetAllParks();
@@ -65,7 +58,11 @@ namespace Capstone.Web.Controllers
 		{
 			Park park = ParksDAL.GetPark(code);
 			park.FiveDayForecast = WeatherDAL.GetForecast(code);
-			if (park != new Park())
+			if (HttpContext.Session.Get<string>(Temp_Unit_Choice) != null)
+			{
+				park.FiveDayForecast.Select(w => { w.UnitPrefence = HttpContext.Session.Get<string>(Temp_Unit_Choice); return w; }).ToList();
+			}
+			if (park.Code != null)
 			{
 				return View(park);
 			}
@@ -75,10 +72,10 @@ namespace Capstone.Web.Controllers
 			}
 		}
 
-		public IActionResult ChangeUnits(string code, string unit)
+		public IActionResult ChangeUnits(string parkCode, string unit)
 		{
 			HttpContext.Session.Set(Temp_Unit_Choice, unit);
-			return RedirectToAction("Detail", "Home", code);
+			return RedirectToAction("Detail", new { code = parkCode });
 		}
 
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
