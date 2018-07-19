@@ -57,12 +57,17 @@ namespace Capstone.Web.Controllers
 
 		public IActionResult Detail(string code)
 		{
+			// Get the chosen Park
 			Park park = ParksDAL.GetPark(code);
+			//Get the forecast for the park
 			park.FiveDayForecast = WeatherDAL.GetForecast(code);
+			// If the user has a unit preference for temp unit, apply it to each weather element
 			if (HttpContext.Session.Get<string>(Temp_Unit_Choice) != null)
 			{
 				park.FiveDayForecast.Select(w => { w.UnitPrefence = HttpContext.Session.Get<string>(Temp_Unit_Choice); return w; }).ToList();
 			}
+
+			// Only display the page, if the park was found
 			if (park.Code != null)
 			{
 				return View(park);

@@ -1,16 +1,24 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification\ 
 for details on configuring this project to bundle and minify static web assets. */
 body {
+    --text-color: #334251;
+    --link-color: #4f745e;
+    --background-color1: #b7a56c;
+    --background-color2: #b7a56c;
+    --navbar-color: #6d6866;
+    --navbar-link-color: #818656;
     padding-bottom: 20px;
-    background: linear-gradient(to bottom right, rgb(0, 121, 57),rgb(0, 179, 73));
+    background: linear-gradient(to bottom right, var(--background-color1),var(--background-color2));
     background-repeat: no-repeat;
     background-attachment: fixed;
-    color: #003d34;
+    color: var(--text-color);
 }
 
     body a {
-        color: #00787A;
+        color: var(--link-color);
     }
+
+    
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
@@ -63,6 +71,10 @@ body {
     display: inline-block;
     max-width: 800px;
     vertical-align: top;
+}
+
+hr {
+    border-top: 1px solid var(--text-color);
 }
 
 .title {
@@ -126,17 +138,18 @@ body {
 }
 
 .unit-swap a {
-    color: #94ebd8;
+    color: var(--link-color);
 }
 
 .navbar {
-    background: #003d34;
+    background: var(--navbar-color);
 }
 
     .navbar a {
-        color: #94ebd8;
+        color: var(--navbar-link-color);
     }
-.winner{
+
+.winner {
     font-weight: bold;
     font-size: 4rem;
 }
