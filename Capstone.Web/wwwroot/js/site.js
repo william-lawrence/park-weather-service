@@ -49,7 +49,7 @@ function showTemp() {
     var temps = document.getElementsByClassName("temperature");
     var btnTxt = document.getElementById("convertBtn");
     if (currentUnit == "C") {
-        btnTxt.innerHTML = 'Convert To F';
+        btnTxt.innerHTML = 'Convert To Fahrenheit';
 
         for (var i = 0; i < temps.length; i++) {
             temps[i].textContent = convertToC(temps[i].textContent);
@@ -61,8 +61,8 @@ function showTemp() {
 
 function toggleTemp() {
     var buttonTxt = document.getElementById("convertBtn");
-    if (buttonTxt.innerHTML == 'Convert To C') {
-        buttonTxt.innerHTML = 'Convert To F';
+    if (buttonTxt.innerHTML == 'Convert To Celsius') {
+        buttonTxt.innerHTML = 'Convert To Fahrenheit';
         var temps = document.getElementsByClassName("temperature");
         for (var i = 0; i < temps.length; i++) {
             temps[i].textContent = convertToC(temps[i].textContent);
@@ -72,7 +72,7 @@ function toggleTemp() {
 
     }
     else {
-        buttonTxt.innerHTML = 'Convert To C';
+        buttonTxt.innerHTML = 'Convert To Celsius';
         var temps = document.getElementsByClassName("temperature");
         for (var i = 0; i < temps.length; i++) {
             temps[i].textContent = convertToF(temps[i].textContent);

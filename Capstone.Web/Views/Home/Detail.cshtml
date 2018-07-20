@@ -45,6 +45,7 @@
 <h3>Five Day Forecast</h3>
 <div class="card">
     <div class="unit-swap">
+        <button onclick="toggleTemp()" id="convertBtn">Convert To Celsius</button>
         Change Temperature Units:
         <a asp-controller="Home" asp-action="ChangeUnits" asp-route-parkCode="@Model.Code" asp-route-unit="F">Fahrenheit</a> |
         <a asp-controller="Home" asp-action="ChangeUnits" asp-route-parkCode="@Model.Code" asp-route-unit="C">Celcius</a> |
@@ -53,59 +54,59 @@
     <br />
     @for (int i = 0; i < Model.FiveDayForecast.Count && i < 5; i++)
     {
-        <div class="weather-@((i==0)?"big":"small")">
-            <center>@DateTime.Today.AddDays(i).DayOfWeek</center>
-            <img src="~/images/weather/transparent/@(new string(Model.FiveDayForecast[i].Forecast.Where(c => !Char.IsWhiteSpace(c)).ToArray())).png" alt="@Model.FiveDayForecast[i].Forecast" />
-            @{
-                string high = Model.FiveDayForecast[i].HighTemp;
-                string low = Model.FiveDayForecast[i].LowTemp;
-            }
-            @if (i == 0)
-            {
-                <center>High: @high   Low: @low</center>
-                <div>
-                    Just Remember:
-                    <ul>
-                        @if (Model.FiveDayForecast[i].Forecast == "snow")
-                        {
-                            <li>Pack Your Snowshoes</li>
-                        }
-                        @if (Model.FiveDayForecast[i].Forecast == "rain")
-                        {
-                            <li>Pack Your Rain Gear</li>
-                            <li>Wear Waterproof Shoes</li>
-                        }
-                        @if (Model.FiveDayForecast[i].Forecast == "thunderstorms")
-                        {
-                            <li>Seek Shelter During a Storm</li>
-                            <li>SAvoid Hiking on Exposed Ridges</li>
-                        }
-                        @if (Model.FiveDayForecast[i].Forecast == "sunny")
-                        {
-                            <li>Pack Your Sunblock</li>
-                        }
-                        @if (Model.FiveDayForecast[i].HighTempF >= HighTempDanger)
-                        {
-                            <li>Bring an Extra Gallon of Water</li>
-                        }
-                        @if (Model.FiveDayForecast[i].HighTempF - Model.FiveDayForecast[i].LowTempF >= TempDifferenceAdvisory)
-                        {
-                            <li>Wear Breathable Layers</li>
-                        }
-                        @if (Model.FiveDayForecast[i].LowTempF <= LowTempDanger)
-                        {
-                            <li>Be Aware of the Dangers of Exposure to Frigid Temperatures</li>
-                        }
-                        <li>Have a Great Day!</li>
-                    </ul>
-                </div>
-            }
-            else
-            {
-                <center>High: @high</center>
-                <center>Low: @low</center>
-            }
-        </div>
+    <div class="weather-@((i==0)?"big":"small")">
+        <center>@DateTime.Today.AddDays(i).DayOfWeek</center>
+        <img src="~/images/weather/transparent/@(new string(Model.FiveDayForecast[i].Forecast.Where(c => !Char.IsWhiteSpace(c)).ToArray())).png" alt="@Model.FiveDayForecast[i].Forecast" />
+        @{
+            string high = Model.FiveDayForecast[i].HighTemp;
+            string low = Model.FiveDayForecast[i].LowTemp;
+        }
+        @if (i == 0)
+        {
+            <center>High: <span class="temperature">@high</span>   Low: <span class="temperature">@low</span></center>
+            <div>
+                Just Remember:
+                <ul>
+                    @if (Model.FiveDayForecast[i].Forecast == "snow")
+                    {
+                        <li>Pack Your Snowshoes</li>
+                    }
+                    @if (Model.FiveDayForecast[i].Forecast == "rain")
+                    {
+                        <li>Pack Your Rain Gear</li>
+                        <li>Wear Waterproof Shoes</li>
+                    }
+                    @if (Model.FiveDayForecast[i].Forecast == "thunderstorms")
+                    {
+                        <li>Seek Shelter During a Storm</li>
+                        <li>SAvoid Hiking on Exposed Ridges</li>
+                    }
+                    @if (Model.FiveDayForecast[i].Forecast == "sunny")
+                    {
+                        <li>Pack Your Sunblock</li>
+                    }
+                    @if (Model.FiveDayForecast[i].HighTempF >= HighTempDanger)
+                    {
+                        <li>Bring an Extra Gallon of Water</li>
+                    }
+                    @if (Model.FiveDayForecast[i].HighTempF - Model.FiveDayForecast[i].LowTempF >= TempDifferenceAdvisory)
+                    {
+                        <li>Wear Breathable Layers</li>
+                    }
+                    @if (Model.FiveDayForecast[i].LowTempF <= LowTempDanger)
+                    {
+                        <li>Be Aware of the Dangers of Exposure to Frigid Temperatures</li>
+                    }
+                    <li>Have a Great Day!</li>
+                </ul>
+            </div>
+        }
+        else
+        {
+            <center class="temperature">High: @high</center>
+            <center clas>Low: @low</center>
+        }
+    </div>
 
     }
 </div>
