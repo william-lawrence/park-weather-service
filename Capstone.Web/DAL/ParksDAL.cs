@@ -94,8 +94,14 @@ namespace Capstone.Web.DAL
 			park.Description = Convert.ToString(reader["parkDescription"]);
 			park.EntryFee = Convert.ToInt32(reader["entryFee"]);
 			park.NumberOfAnimalSpecies = Convert.ToInt32(reader["numberOfAnimalSpecies"]);
-			park.WeatherUrlSlice = Convert.ToString(reader["weatherUrlSlice"]);
-			park.MapUrlSlice = Convert.ToString(reader["mapUrlSlice"]);
+			if (reader["weatherUrlSlice"] != DBNull.Value)
+			{
+				park.WeatherUrlSlice = Convert.ToString(reader["weatherUrlSlice"]);
+			}
+			if (reader["weatherUrlSlice"] != DBNull.Value)
+			{
+				park.MapUrlSlice = Convert.ToString(reader["mapUrlSlice"]);
+			}
 			return park;
 		}
 	}
