@@ -4,34 +4,32 @@
 }
 
 <body>
-    <div class="card result-wrapper">
-        <div class="result-image">
-            <a asp-controller="Home" asp-action="Detail" asp-route-code="@Model[0].Code"><img src="~/images/parks/@(Model[0].Code).jpg" /></a>
-        </div>
-        <div class="result-text">
-            <h2>The favorite park as voted by users:</h2>
-            <a asp-controller="Home" asp-action="Detail" asp-route-code="@Model[0].Code"><h1 class="winner">@Model[0].Name</h1></a>
-            <p class="votes">Votes: @Model[0].NumberOfVotes</p>
-            <p>@Model[0].Description</p>
-        </div>
-
-    </div>
-
-    @for(int i = 1; i < Model.Count; i++)
+    @for (int i = 0; i < Model.Count; i++)
     {
-    <div class="card result-wrapper">
+        <div class="card result-wrapper">
+            <div class="result-image">
+                <a asp-controller="Home" asp-action="Detail" asp-route-code="@Model[i].Code"><img src="~/images/parks/@(Model[i].Code).jpg " /></a>
+            </div>
 
-
-        <div class="result-image">
-            <a asp-controller="Home" asp-action="Detail" asp-route-code="@Model[i].Code"><img src="~/images/parks/@(Model[i].Code).jpg "/></a>
+            <div class="result-text">
+                <a asp-controller="Home" asp-action="Detail" asp-route-code="@Model[i].Code">
+                    @if (i == 0)
+                    {
+                        <h1 class="winner">@Model[0].Name</h1>
+                    }
+                    else
+                    {
+                        <h2>@Model[i].Name</h2>
+                    }
+                </a>
+                <p class="votes">Votes: @Model[i].NumberOfVotes</p>
+                <p>@Model[i].Description</p>
+            </div>
         </div>
-
-        <div class="result-text">
-            <a asp-controller="Home" asp-action="Detail" asp-route-code="@Model[i].Code"><h2>@Model[i].Name</h2></a>
-            <p class="votes">Votes: @Model[i].NumberOfVotes</p>
-            <p>@Model[i].Description</p>
-        </div>
-    </div>
     }
 
+    @if (Model.Count==0)
+    {
+        <div class="card">Sorry, no one's voted yet. Go take our survey <a asp-controller="home" asp-action="survey">here</a>!</div>
+    }
 </body>

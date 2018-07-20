@@ -7,7 +7,7 @@
 
     string unit = Convert.ToString(TempData["unit"]) == "C" ? "" : "?unit=us";
 }
-<center><h1>@Model.Name</h1></center>
+<center><h1 class="outlined">@Model.Name</h1></center>
 <center><img class="detail-img" src="~/images/parks/@(Model.Code).jpg" alt="@Model.Name" /></center>
 
 
@@ -120,5 +120,5 @@
     </div>
 *@
 
-<h3>Get Directions:</h3>
+<h3 class="outlined">Get Directions:</h3>
 <iframe src="https://www.google.com/maps/embed?pb=@Model.MapUrlSlice" width="100%" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>

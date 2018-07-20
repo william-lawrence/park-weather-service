@@ -8,10 +8,11 @@ body {
     --navbar-color: rgb(119, 136, 164);
     --navbar-link-color: rgb(31, 201, 9);
     padding-bottom: 20px;
-    background: var(--background-color1);
-    background-repeat: no-repeat;
+    background-color: var(--background-color1);
+    background-image: url(../images/background.jpg);
+    background-size:cover;
     background-attachment: fixed;
-    color: var(--text-color);
+    color: white;
 }
 
     body a {
@@ -167,7 +168,9 @@ hr {
     padding: 10px;
     margin-bottom: 15px;
     position: relative;
+    color:var(--text-color);
     background-color: var(--background-color2);
+    background-image:url(../images/card-background.png);
     display: block;
     border-radius: 3px;
     border: 1px #d6d6d6;
@@ -208,4 +211,8 @@ p{
 
 select {
     width: 165px;
+}
+
+.outlined {
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
