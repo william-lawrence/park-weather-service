@@ -83,6 +83,16 @@ namespace Capstone.Web.Models
 		public int NumberOfAnimalSpecies { get; set; }
 
 		/// <summary>
+		/// Represents a slice of the url specific to the park for retrieving weather data
+		/// </summary>
+		public string WeatherUrlSlice { get; set; }
+
+		/// <summary>
+		/// Represents a slice of the url specific to the park for retrieving weather data
+		/// </summary>
+		public string MapUrlSlice { get; set; }
+
+		/// <summary>
 		/// Represents A five day forecast for the Park
 		/// </summary>
 		public IList<Weather> FiveDayForecast { get; set; }
