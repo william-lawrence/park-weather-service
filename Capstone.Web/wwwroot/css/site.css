@@ -5,22 +5,24 @@ body {
     --link-color: rgb(97, 109, 134);
     --background-color1: rgb(43, 151, 217);
     --background-color2: #b7a56c;
-    --navbar-color: rgb(119, 136, 164);
+    --navbar-color: rgb(97, 109, 134);
     --navbar-link-color: rgb(31, 201, 9);
     padding-bottom: 20px;
-    background: var(--background-color1);
-    background-repeat: no-repeat;
+    background-color: var(--background-color1);
+    background-image: url(../images/background.jpg);
+    background-size: cover;
     background-attachment: fixed;
-    color: var(--text-color);
+    color: white;
 }
 
     body a {
         color: var(--link-color);
     }
 
-        body a:hover {
-            color:
-        }
+.navbar-toggle {
+    background-color: rgb(161, 167, 199);
+    color: var(--link-color);
+}
 
 
 /* Wrapping element */
@@ -65,7 +67,7 @@ body {
     vertical-align: top;
 }
 
-.home-park-img img {
+    .home-park-img img {
         width: 300px;
         height: auto;
         border-radius: 4px;
@@ -95,7 +97,7 @@ hr {
 
 .weather-big {
     display: inline-block;
-    max-width: 250px;
+    max-width: 280px;
     padding-right: 40px;
     vertical-align: top;
 }
@@ -166,7 +168,9 @@ hr {
     padding: 10px;
     margin-bottom: 15px;
     position: relative;
+    color: var(--text-color);
     background-color: var(--background-color2);
+    background-image: url(../images/card-background.png);
     display: block;
     border-radius: 3px;
     border: 1px #d6d6d6;
@@ -191,12 +195,14 @@ hr {
 
 .votes {
     font-weight: bold;
-h2 {
+}
+
+h1 {
     margin-top: 0px;
 }
 
-p{
-    text-indent:2em;
+p {
+    text-indent: 2em;
 }
 
 .inquiry {
@@ -207,3 +213,18 @@ p{
 select {
     width: 165px;
 }
+
+.outlined {
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+.unit-btn {
+    background-color: #226594;
+    color: white;
+    padding: 5px;
+    border-radius: 2px;
+}
+
+    .unit-btn:hover {
+        color: rgb(223, 222, 222);
+    }

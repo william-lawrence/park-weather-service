@@ -1,12 +1,14 @@
 ﻿@model Park
 @{
     ViewData["Title"] = "Detail";
-    int HighTempDanger = 75;
-    int TempDifferenceAdvisory = 20;
-    int LowTempDanger = 20;
+    //int HighTempDanger = 75;
+    //int TempDifferenceAdvisory = 20;
+    //int LowTempDanger = 20;
+
+    string unit = Convert.ToString(TempData["unit"]) == "C" ? "" : "?unit=us";
 }
-<h2>@Model.Name</h2>
-<img class="detail-img" src="~/images/parks/@(Model.Code).jpg" alt="@Model.Name" />
+<center><h1 class="outlined">@Model.Name</h1></center>
+<center><img class="detail-img" src="~/images/parks/@(Model.Code).jpg" alt="@Model.Name" /></center>
 
 
 <div class="card">
@@ -20,7 +22,7 @@
         }
         available to the public.
         You might see as many as @Model.NumberOfAnimalSpecies types of animals here, like maybe a fox or a moose!
-        @if (@Model.InspirationalQuoteSource != "Unknow")
+        @if (@Model.InspirationalQuoteSource != "Unknown")
         {
             <text> @Model.InspirationalQuoteSource</text>
         }
@@ -42,73 +44,81 @@
     </p>
     <p>@Model.Description</p>
 </div>
-<h3>Five Day Forecast</h3>
-<div class="card">
-    <div class="unit-swap">
-        <button onclick="toggleTemp()" id="convertBtn">Convert To Celsius</button>
-        Change Temperature Units:
-        <a asp-controller="Home" asp-action="ChangeUnits" asp-route-parkCode="@Model.Code" asp-route-unit="F">Fahrenheit</a> |
-        <a asp-controller="Home" asp-action="ChangeUnits" asp-route-parkCode="@Model.Code" asp-route-unit="C">Celcius</a> |
-        <a asp-controller="Home" asp-action="ChangeUnits" asp-route-parkCode="@Model.Code" asp-route-unit="K">Kelvin</a>
-    </div>
-    <br />
-    @for (int i = 0; i < Model.FiveDayForecast.Count && i < 5; i++)
-    {
-    <div class="weather-@((i==0)?"big":"small")">
-        <center>@DateTime.Today.AddDays(i).DayOfWeek</center>
-        <img src="~/images/weather/transparent/@(new string(Model.FiveDayForecast[i].Forecast.Where(c => !Char.IsWhiteSpace(c)).ToArray())).png" alt="@Model.FiveDayForecast[i].Forecast" />
-        @{
+
+<a class="weatherwidget-io" href="https://forecast7.com/en/@Model.WeatherUrlSlice/@unit" data-label_1="@Model.Name.ToUpper()" data-label_2="WEATHER" data-icons="Climacons Animated" data-days="5" data-theme="original" data-basecolor="#226594">@Model.Name.ToUpper() WEATHER</a>
+<script>
+    !function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = 'https://weatherwidget.io/js/widget.min.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'weatherwidget-io-js');
+</script>
+<a class="unit-btn" asp-controller="Home" asp-action="ChangeUnits" asp-route-parkCode="@Model.Code">°F | °C</a>
+
+@*
+    <h3>Five Day Forecast</h3>
+    <div class="card">
+        <div class="unit-swap">
+            Change Temperature Units:
+            <a asp-controller="Home" asp-action="ChangeUnits" asp-route-parkCode="@Model.Code" asp-route-unit="F">Fahrenheit</a> |
+            <a asp-controller="Home" asp-action="ChangeUnits" asp-route-parkCode="@Model.Code" asp-route-unit="C">Celcius</a> |
+            <a asp-controller="Home" asp-action="ChangeUnits" asp-route-parkCode="@Model.Code" asp-route-unit="K">Kelvin</a>
+        </div>
+        <br />
+        @for (int i = 0; i < Model.FiveDayForecast.Count && i < 5; i++)
+        {
+        <div class="weather-@((i==0)?" big":"small")">
+            <center>@DateTime.Today.AddDays(i).DayOfWeek</center>
+            <img src="~/images/weather/transparent/@(new string(Model.FiveDayForecast[i].Forecast.Where(c => !Char.IsWhiteSpace(c)).ToArray())).png" alt="@Model.FiveDayForecast[i].Forecast" />
+            @{
             string high = Model.FiveDayForecast[i].HighTemp;
             string low = Model.FiveDayForecast[i].LowTemp;
-        }
-        @if (i == 0)
-        {
-            <center>High: <span class="temperature">@high</span>   Low: <span class="temperature">@low</span></center>
+            }
+            @if (i == 0)
+            {
+            <center>High: @high   Low: @low</center>
             <div>
                 Just Remember:
                 <ul>
                     @if (Model.FiveDayForecast[i].Forecast == "snow")
                     {
-                        <li>Pack Your Snowshoes</li>
+                    <li>Pack Your Snowshoes</li>
                     }
                     @if (Model.FiveDayForecast[i].Forecast == "rain")
                     {
-                        <li>Pack Your Rain Gear</li>
-                        <li>Wear Waterproof Shoes</li>
+                    <li>Pack Your Rain Gear</li>
+                    <li>Wear Waterproof Shoes</li>
                     }
                     @if (Model.FiveDayForecast[i].Forecast == "thunderstorms")
                     {
-                        <li>Seek Shelter During a Storm</li>
-                        <li>SAvoid Hiking on Exposed Ridges</li>
+                    <li>Seek Shelter During a Storm</li>
+                    <li>Avoid Hiking on Exposed Ridges</li>
                     }
                     @if (Model.FiveDayForecast[i].Forecast == "sunny")
                     {
-                        <li>Pack Your Sunblock</li>
+                    <li>Pack Your Sunblock</li>
                     }
                     @if (Model.FiveDayForecast[i].HighTempF >= HighTempDanger)
                     {
-                        <li>Bring an Extra Gallon of Water</li>
+                    <li>Bring an Extra Gallon of Water</li>
                     }
                     @if (Model.FiveDayForecast[i].HighTempF - Model.FiveDayForecast[i].LowTempF >= TempDifferenceAdvisory)
                     {
-                        <li>Wear Breathable Layers</li>
+                    <li>Wear Breathable Layers</li>
                     }
                     @if (Model.FiveDayForecast[i].LowTempF <= LowTempDanger)
                     {
-                        <li>Be Aware of the Dangers of Exposure to Frigid Temperatures</li>
+                    <li>Be Aware of the Dangers of Exposure to Frigid Temperatures</li>
                     }
                     <li>Have a Great Day!</li>
                 </ul>
             </div>
-        }
-        else
-        {
-            <center class="temperature">High: @high</center>
-            <center clas>Low: @low</center>
+            }
+            else
+            {
+            <center>High: @high</center>
+            <center>Low: @low</center>
+            }
+        </div>
         }
     </div>
+*@
 
-    }
-</div>
-
-
+<h3 class="outlined">Get Directions:</h3>
+<iframe src="https://www.google.com/maps/embed?pb=@Model.MapUrlSlice" width="100%" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>

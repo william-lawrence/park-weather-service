@@ -9,11 +9,13 @@
         <form asp-controller="Home" asp-action="Survey" method="post">
 
             <label class="inquiry">Pick Your Favorite Park:</label>
-            <select asp-for="ParkCode" asp-items="@SurveyResult.Parks"></select>
+            <select asp-for="ParkCode" asp-items="SurveyResult.Parks"></select>
+            <span asp-validation-for="ParkCode" class="validation-error"></span>
             <br />
 
             <label class="inquiry">State of Residence:</label>
             <select asp-for="State" asp-items="SurveyResult.States"></select>
+            <span asp-validation-for="State" class="validation-error"></span>
             <br />
 
             <label class="inquiry">Email:</label>
@@ -21,7 +23,7 @@
             <span asp-validation-for="EmailAddress" class="validation-error"></span>
             <br />
 
-            <label>Activity Level:</label>
+            <label>What is Your Activity Level:</label>
             <span asp-validation-for="ActivityLevel" class="validation-error"></span>
             <br />
 
