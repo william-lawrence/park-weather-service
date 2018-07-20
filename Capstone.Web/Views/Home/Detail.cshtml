@@ -44,14 +44,11 @@
     </p>
     <p>@Model.Description</p>
 </div>
-@if (Model.WeatherUrlSlice != null)
-{
-    <a class="weatherwidget-io" href="https://forecast7.com/en/@Model.WeatherUrlSlice/@unit" data-label_1="@Model.Name.ToUpper()" data-label_2="WEATHER" data-icons="Climacons Animated" data-days="5" data-theme="original" data-basecolor="#226594">@Model.Name.ToUpper() WEATHER</a>
-    <script>
-        !function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = 'https://weatherwidget.io/js/widget.min.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'weatherwidget-io-js');
-    </script>
-    <a class="unit-btn" asp-controller="Home" asp-action="ChangeUnits" asp-route-parkCode="@Model.Code">°F | °C</a>
-}
+
+<a class="weatherwidget-io" id="weather" href="https://forecast7.com/en/@Model.WeatherUrlSlice/@unit" data-label_1="@Model.Name.ToUpper()" data-label_2="WEATHER" data-icons="Climacons Animated" data-days="5" data-theme="original" data-basecolor="#226594">@Model.Name.ToUpper() WEATHER</a>
+
+<button id="convertBtn" onclick="toggleTemp();">Convert To Celsius</button>
+
 @*
     <h3>Five Day Forecast</h3>
     <div class="card">

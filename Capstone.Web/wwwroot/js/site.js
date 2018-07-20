@@ -5,10 +5,8 @@
 
 //document.onload.setCookie("Unit", "F", 1);
 
+//document.onload.setCookie("Unit", "F", 1);
 
-if (document.getElementsByClassName("detail-img") != null) {
-    window.onload = showTemp();
-}
 
 function setCookie(cname, cvalue, exdays) {
     var d = new Date();
@@ -44,53 +42,45 @@ function switchCookie() {
 
 };
 
-function showTemp() {
-    var currentUnit = getCookie("Unit");
-    var temps = document.getElementsByClassName("temperature");
-    var btnTxt = document.getElementById("convertBtn");
-    if (currentUnit == "C") {
-        btnTxt.innerHTML = 'Convert To Fahrenheit';
-
-        for (var i = 0; i < temps.length; i++) {
-            temps[i].textContent = convertToC(temps[i].textContent);
-            console.log(temps[i]);
-
-        }
-    }
-};
 
 function toggleTemp() {
     var buttonTxt = document.getElementById("convertBtn");
     if (buttonTxt.innerHTML == 'Convert To Celsius') {
         buttonTxt.innerHTML = 'Convert To Fahrenheit';
-        var temps = document.getElementsByClassName("temperature");
-        for (var i = 0; i < temps.length; i++) {
-            temps[i].textContent = convertToC(temps[i].textContent);
-            // console.log(temps[i]);
-
-        }
+        var weather = document.getElementById("weather");
+        weather.href = "https://forecast7.com/en/40d71n74d01/new-york/";
+        // console.log(temps[i]);
+        whatJoeWouldDo(document, 'head', 'weatherwidget-io-js');
 
     }
     else {
         buttonTxt.innerHTML = 'Convert To Celsius';
-        var temps = document.getElementsByClassName("temperature");
-        for (var i = 0; i < temps.length; i++) {
-            temps[i].textContent = convertToF(temps[i].textContent);
-            //console.log(temps[i]);
-        }
+        var weather = document.getElementById("weather");
+        weather.href = "https://forecast7.com/en/40d71n74d01/new-york/?unit=us";
+        //console.log(temps[i]);
+        whatJoeWouldDo(document, 'head', 'weatherwidget-io-js');
+
     }
+
     switchCookie();
 };
 
+function whatJoeWouldDo(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    let ele = d.getElementById(id);
+    if (ele) {
+        ele.parentNode.removeChild(ele);
+    }
+
+    js = d.createElement('script');
+    js.id = id;
+    js.src = 'https://weatherwidget.io/js/widget.min.js';
+    fjs.insertAdjacentElement('beforeend', js);
 
 
-function convertToF(num) {
-    var intNum = parseInt(num);
-    // console.log("this is convert to F");
-    return (intNum * (9.0 / 5.0) + 32).toPrecision(2);
 };
-function convertToC(num) {
-    var intNum = parseInt(num);
-    // console.log("this is convert to C");
-    return ((intNum - 32) * 5 / 9).toPrecision(2);
-};
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    whatJoeWouldDo(document, 'head', 'weatherwidget-io-js');
+});
