@@ -106,6 +106,11 @@ namespace Capstone.Web.DAL
             return parks;
         }
 
+        /// <summary>
+        /// Gets park information from data base and adds it to an object.
+        /// </summary>
+        /// <param name="reader">Reader that is getting the data from the data base</param>
+        /// <returns></returns>
         private Park MapParkFromRow(SqlDataReader reader)
         {
             Park park = new Park
