@@ -5,8 +5,8 @@
     int TempDifferenceAdvisory = 20;
     int LowTempDanger = 20;
 }
-<h2>@Model.Name</h2>
-<img class="detail-img" src="~/images/parks/@(Model.Code).jpg" alt="@Model.Name" />
+<center><h1>@Model.Name</h1></center>
+<center><img class="detail-img" src="~/images/parks/@(Model.Code).jpg" alt="@Model.Name" /></center>
 
 
 <div class="card">
@@ -20,7 +20,7 @@
         }
         available to the public.
         You might see as many as @Model.NumberOfAnimalSpecies types of animals here, like maybe a fox or a moose!
-        @if (@Model.InspirationalQuoteSource != "Unknow")
+        @if (@Model.InspirationalQuoteSource != "Unknown")
         {
             <text> @Model.InspirationalQuoteSource</text>
         }
@@ -78,7 +78,7 @@
                         @if (Model.FiveDayForecast[i].Forecast == "thunderstorms")
                         {
                             <li>Seek Shelter During a Storm</li>
-                            <li>SAvoid Hiking on Exposed Ridges</li>
+                            <li>Avoid Hiking on Exposed Ridges</li>
                         }
                         @if (Model.FiveDayForecast[i].Forecast == "sunny")
                         {
