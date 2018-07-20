@@ -5,12 +5,12 @@ body {
     --link-color: rgb(97, 109, 134);
     --background-color1: rgb(43, 151, 217);
     --background-color2: #b7a56c;
-    --navbar-color: rgb(119, 136, 164);
+    --navbar-color: rgb(97, 109, 134);
     --navbar-link-color: rgb(31, 201, 9);
     padding-bottom: 20px;
     background-color: var(--background-color1);
     background-image: url(../images/background.jpg);
-    background-size:cover;
+    background-size: cover;
     background-attachment: fixed;
     color: white;
 }
@@ -19,10 +19,10 @@ body {
         color: var(--link-color);
     }
 
-    .navbar-toggle{
-        background-color:var(--text-color);
-        color:var(--link-color);
-    }
+.navbar-toggle {
+    background-color: rgb(161, 167, 199);
+    color: var(--link-color);
+}
 
 
 /* Wrapping element */
@@ -67,7 +67,7 @@ body {
     vertical-align: top;
 }
 
-.home-park-img img {
+    .home-park-img img {
         width: 300px;
         height: auto;
         border-radius: 4px;
@@ -168,9 +168,9 @@ hr {
     padding: 10px;
     margin-bottom: 15px;
     position: relative;
-    color:var(--text-color);
+    color: var(--text-color);
     background-color: var(--background-color2);
-    background-image:url(../images/card-background.png);
+    background-image: url(../images/card-background.png);
     display: block;
     border-radius: 3px;
     border: 1px #d6d6d6;
@@ -196,12 +196,13 @@ hr {
 .votes {
     font-weight: bold;
 }
+
 h1 {
     margin-top: 0px;
 }
 
-p{
-    text-indent:2em;
+p {
+    text-indent: 2em;
 }
 
 .inquiry {
@@ -216,3 +217,14 @@ select {
 .outlined {
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }
+
+.unit-btn {
+    background-color: #226594;
+    color: white;
+    padding: 5px;
+    border-radius: 2px;
+}
+
+    .unit-btn:hover {
+        color: rgb(223, 222, 222);
+    }
