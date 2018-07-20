@@ -70,7 +70,9 @@ body {
     .home-park-img img {
         width: 300px;
         height: auto;
-        border-radius: 4px;
+        border-radius: 50px;
+        border: 1px solid #d6d6d6;
+        box-shadow: 3px 3px 0px #bababa;
     }
 
 .home-park-text {
@@ -80,7 +82,7 @@ body {
 }
 
 hr {
-    border-top: 1px solid var(--text-color);
+    border-top: 1px solid rgb(97, 109, 134);
 }
 
 .title {
@@ -142,7 +144,7 @@ hr {
     margin-bottom: 15px;
     position: relative;
     display: block;
-    border-radius: 3px;
+    border-radius: 200px;
     border: 1px solid #d6d6d6;
     box-shadow: 3px 3px 0px #bababa;
 }
@@ -172,7 +174,7 @@ hr {
     background-color: var(--background-color2);
     background-image: url(../images/card-background.png);
     display: block;
-    border-radius: 3px;
+    border-radius: 8px;
     border: 1px #d6d6d6;
     border-top-style: solid;
     border-bottom-style: solid;
