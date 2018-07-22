@@ -35,8 +35,8 @@ create table park
 	parkDescription varchar(max) not null,
 	entryFee int not null,
 	numberOfAnimalSpecies int not null,
-	weatherUrlSlice varchar(100) not null,
-	mapUrlSlice varchar(max) not null,
+	weatherUrlSlice varchar(100),
+	mapUrlSlice varchar(max),
 
 	constraint pk_park primary key (parkCode)
 );
