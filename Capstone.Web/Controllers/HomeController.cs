@@ -59,6 +59,7 @@ namespace Capstone.Web.Controllers
 		{
 			// Get the chosen Park
 			Park park = ParksDAL.GetPark(code);
+			
 			////Get the forecast for the park
 			//park.FiveDayForecast = WeatherDAL.GetForecast(code);
 			//// If the user has a unit preference for temp unit, apply it to each weather element
@@ -80,19 +81,19 @@ namespace Capstone.Web.Controllers
 			}
 		}
 
-		public IActionResult ChangeUnits(string parkCode, string unit)
-		{
-			string currentUnit = HttpContext.Session.Get<string>(Temp_Unit_Choice);
-			if (currentUnit == null || currentUnit == "F")
-			{
-				HttpContext.Session.Set(Temp_Unit_Choice, "C");
-			}
-			else
-			{
-				HttpContext.Session.Set(Temp_Unit_Choice, "F");
-			}
-			return RedirectToAction("Detail", new { code = parkCode });
-		}
+		//public IActionResult ChangeUnits(string parkCode, string unit)
+		//{
+		//	string currentUnit = HttpContext.Session.Get<string>(Temp_Unit_Choice);
+		//	if (currentUnit == null || currentUnit == "F")
+		//	{
+		//		HttpContext.Session.Set(Temp_Unit_Choice, "C");
+		//	}
+		//	else
+		//	{
+		//		HttpContext.Session.Set(Temp_Unit_Choice, "F");
+		//	}
+		//	return RedirectToAction("Detail", new { code = parkCode });
+		//}
 
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 		public IActionResult Error()

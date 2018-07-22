@@ -222,9 +222,11 @@ select {
 
 .unit-btn {
     background-color: #226594;
+    border: none;
     color: white;
     padding: 5px;
-    border-radius: 2px;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
 }
 
     .unit-btn:hover {
