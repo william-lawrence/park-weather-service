@@ -1,7 +1,7 @@
 # Park Weather Service
 
 ## Introduction
-This repo was a team praject that I completed as part of programming bootcamp that I attend. The aim of the project was to show that 
+This repo was a team praject that I completed as part of programming bootcamp that I attended. The aim of the project was to show that 
 we could build a ASP.NET Core web application.  
 
 It should be noted that we use a limited database for the parks.
